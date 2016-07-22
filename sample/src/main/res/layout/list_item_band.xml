@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/list_item_height">
+
+  <ImageView
+    android:id="@+id/list_item_band_arrow"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="@dimen/horizontal_margin"
+    android:src="@drawable/ic_arrow_down" />
+
+  <TextView
+    android:id="@+id/list_item_band_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/list_item_left_margin"
+    android:gravity="center_vertical"
+    tools:text="Band Name" />
+
+</FrameLayout>
