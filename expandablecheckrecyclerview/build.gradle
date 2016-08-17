@@ -44,7 +44,7 @@ android {
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile project(':expandablerecyclerview')
+  compile 'com.thoughtbot:expandablerecyclerview:1.0'
 
   //android
   compile 'com.android.support:appcompat-v7:23.4.0'
@@ -55,3 +55,6 @@ dependencies {
   testCompile 'org.robolectric:robolectric:3.0'
   testCompile 'org.mockito:mockito-core:1.10.5'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
