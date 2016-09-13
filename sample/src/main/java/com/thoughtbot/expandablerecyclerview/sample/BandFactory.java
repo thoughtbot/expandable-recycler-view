@@ -34,7 +34,7 @@ public class BandFactory {
   public static List<SingleCheckBand> makeSingleCheckBands() {
     ArrayList list = new ArrayList();
     for (int i = 0; i < 6; i++) {
-      list.add(new SingleCheckBand("Band " + i, makeSongs()));
+      list.add(new SingleCheckBand("Band " + i, makeSongs(), i % 2 == 0));
     }
     return list;
   }

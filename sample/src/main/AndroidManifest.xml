@@ -33,6 +33,10 @@
       android:name=".multitype.MultiTypeActivity"
       android:parentActivityName=".MainActivity" />
 
+    <activity
+      android:name=".multitypeandcheck.MultiTypeCheckBandActivity"
+      android:parentActivityName=".MainActivity" />
+
   </application>
 
 </manifest>
