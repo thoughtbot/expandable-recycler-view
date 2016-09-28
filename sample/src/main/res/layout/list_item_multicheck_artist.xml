@@ -4,12 +4,17 @@
   android:layout_width="match_parent"
   android:layout_height="@dimen/list_item_height">
 
-  <TextView
-    android:id="@+id/list_item_song_name"
+  <CheckedTextView
+    android:id="@+id/list_item_multicheck_artist_name"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/horizontal_margin"
     android:layout_marginLeft="@dimen/list_item_left_margin"
-    android:gravity="center_vertical"
-    tools:text="Song Name" />
+    android:layout_marginRight="@dimen/horizontal_margin"
+    android:layout_marginStart="@dimen/list_item_left_margin"
+    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+    android:gravity="center"
+    android:textAllCaps="true"
+    tools:text="Artist Name" />
 
 </FrameLayout>

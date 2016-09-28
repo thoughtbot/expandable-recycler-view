@@ -10,11 +10,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 
-import static com.thoughtbot.expandablerecyclerview.sample.BandFactory.*;
+import static com.thoughtbot.expandablerecyclerview.sample.GenreDataFactory.makeSingleCheckGenres;
 
 public class SingleCheckActivity extends AppCompatActivity {
 
-  private SingleCheckBandAdapter adapter;
+  private SingleCheckGenreAdapter adapter;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class SingleCheckActivity extends AppCompatActivity {
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-    adapter = new SingleCheckBandAdapter(makeSingleCheckBands());
+    adapter = new SingleCheckGenreAdapter(makeSingleCheckGenres());
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
 

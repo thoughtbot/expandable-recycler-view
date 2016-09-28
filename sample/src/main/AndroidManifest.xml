@@ -34,7 +34,7 @@
       android:parentActivityName=".MainActivity" />
 
     <activity
-      android:name=".multitypeandcheck.MultiTypeCheckBandActivity"
+      android:name=".multitypeandcheck.MultiTypeCheckGenreActivity"
       android:parentActivityName=".MainActivity" />
 
   </application>

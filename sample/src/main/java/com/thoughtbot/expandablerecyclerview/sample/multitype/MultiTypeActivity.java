@@ -7,11 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 
-import static com.thoughtbot.expandablerecyclerview.sample.BandFactory.makeBands;
+import static com.thoughtbot.expandablerecyclerview.sample.GenreDataFactory.makeGenres;
 
 public class MultiTypeActivity extends AppCompatActivity {
 
-  private MultiTypeBandAdapter adapter;
+  private MultiTypeGenreAdapter adapter;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MultiTypeActivity extends AppCompatActivity {
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-    adapter = new MultiTypeBandAdapter(makeBands());
+    adapter = new MultiTypeGenreAdapter(makeGenres());
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
   }

@@ -13,79 +13,79 @@ import com.thoughtbot.expandablecheckrecyclerview.models.CheckedExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.MultiTypeExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
+import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.R;
-import com.thoughtbot.expandablerecyclerview.sample.Song;
-import com.thoughtbot.expandablerecyclerview.sample.expand.BandViewHolder;
-import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckBand;
-import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckSongViewHolder;
-import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
+import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
+import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
+import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckArtistViewHolder;
+import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.LayoutInflater.from;
 
-public class MultiTypeCheckBandAdapter
-    extends MultiTypeExpandableRecyclerViewAdapter<GroupViewHolder, SingleCheckSongViewHolder>
+public class MultiTypeCheckGenreAdapter
+    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder>
     implements OnChildCheckChangedListener, OnChildrenCheckStateChangedListener {
 
   private static final String CHECKED_STATE_MAP = "child_check_controller_checked_state_map";
 
-  public static final int FAVORITE_BAND_VIEW_TYPE = 3;
-  public static final int REGULAR_BAND_VIEW_TYPE = 4;
+  public static final int FAVORITE_VIEW_TYPE = 3;
+  public static final int ARTIST_VIEW_TYPE = 4;
 
   private ChildCheckController childCheckController;
   private OnCheckChildClickListener childClickListener;
 
-  public MultiTypeCheckBandAdapter(List<? extends ExpandableGroup> groups) {
+  public MultiTypeCheckGenreAdapter(List<? extends ExpandableGroup> groups) {
     super(groups);
     childCheckController = new ChildCheckController(expandableList, this);
   }
 
   @Override
-  public GroupViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+  public GenreViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+    View view = from(parent.getContext())
+        .inflate(R.layout.list_item_genre, parent, false);
+    return new GenreViewHolder(view);
+  }
+
+  @Override
+  public ChildViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
     switch (viewType) {
-      case FAVORITE_BAND_VIEW_TYPE:
-        View favorite =
-            from(parent.getContext()).inflate(R.layout.list_item_favorite_band, parent, false);
-        return new FavoriteBandViewHolder(favorite);
-      case REGULAR_BAND_VIEW_TYPE:
-        View regular = from(parent.getContext()).inflate(R.layout.list_item_band, parent, false);
-        return new BandViewHolder(regular);
+      case ARTIST_VIEW_TYPE:
+        View artist = from(parent.getContext()).inflate(R.layout.list_item_artist, parent, false);
+        return new ArtistViewHolder(artist);
+      case FAVORITE_VIEW_TYPE:
+        View view = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.list_item_singlecheck_arist, parent, false);
+        SingleCheckArtistViewHolder holder = new SingleCheckArtistViewHolder(view);
+        holder.setOnChildCheckedListener(this);
+        return holder;
       default:
-        throw new IllegalArgumentException("Invalid viewType");
+        throw new IllegalArgumentException(viewType + " is an Invalid viewType");
     }
   }
 
   @Override
-  public SingleCheckSongViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.list_item_singlecheck_song, parent, false);
-    SingleCheckSongViewHolder holder = new SingleCheckSongViewHolder(view);
-    holder.setOnChildCheckedListener(this);
-    return holder;
-  }
-
-  @Override
-  public void onBindChildViewHolder(SingleCheckSongViewHolder holder, int flatPosition,
-      ExpandableGroup group, int childIndex) {
-    ExpandableListPosition listPosition = expandableList.getUnflattenedPosition(flatPosition);
-    holder.onBindViewHolder(flatPosition, childCheckController.isChildChecked(listPosition));
-    final Song song = (Song) group.getItems().get(childIndex);
-    holder.setSongName(song.getName());
-  }
-
-  @Override
-  public void onBindGroupViewHolder(GroupViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
+  public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, ExpandableGroup group,
+      int childIndex) {
     int viewType = getItemViewType(flatPosition);
-    SingleCheckBand band = ((SingleCheckBand) group);
+    Artist artist = (Artist) group.getItems().get(childIndex);
     switch (viewType) {
-      case FAVORITE_BAND_VIEW_TYPE:
-        ((FavoriteBandViewHolder) holder).setBandName(band);
+      case ARTIST_VIEW_TYPE:
+        ((ArtistViewHolder) holder).setArtistName(artist.getName());
         break;
-      case REGULAR_BAND_VIEW_TYPE:
-        ((BandViewHolder) holder).setBandName(band);
+      case FAVORITE_VIEW_TYPE:
+        ExpandableListPosition listPosition = expandableList.getUnflattenedPosition(flatPosition);
+        ((SingleCheckArtistViewHolder) holder)
+            .onBindViewHolder(flatPosition, childCheckController.isChildChecked(listPosition));
+        ((SingleCheckArtistViewHolder) holder).setArtistName(artist.getName());
     }
+  }
+
+  @Override
+  public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
+      ExpandableGroup group) {
+    holder.setGenreTitle(group);
   }
 
   @Override
@@ -125,16 +125,16 @@ public class MultiTypeCheckBandAdapter
   }
 
   @Override
-  public boolean isGroup(int viewType) {
-    return viewType == FAVORITE_BAND_VIEW_TYPE || viewType == REGULAR_BAND_VIEW_TYPE;
+  public boolean isChild(int viewType) {
+    return viewType == FAVORITE_VIEW_TYPE || viewType == ARTIST_VIEW_TYPE;
   }
 
   @Override
-  public int getGroupViewType(int position, ExpandableGroup group) {
-    if (((SingleCheckBand) group).isFavorite()) {
-      return FAVORITE_BAND_VIEW_TYPE;
+  public int getChildViewType(int position, ExpandableGroup group, int childIndex) {
+    if (((Artist) (group).getItems().get(childIndex)).isFavorite()) {
+      return FAVORITE_VIEW_TYPE;
     } else {
-      return REGULAR_BAND_VIEW_TYPE;
+      return ARTIST_VIEW_TYPE;
     }
   }
 }

@@ -3,7 +3,7 @@ package com.thoughtbot.expandablerecyclerview.sample;
 import android.app.Application;
 import android.content.Context;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
-import com.thoughtbot.expandablerecyclerview.sample.multitype.MultiTypeBandAdapter;
+import com.thoughtbot.expandablerecyclerview.sample.multitype.MultiTypeGenreAdapter;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,15 +19,15 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Unit test for MultiTypeBandAdapter
+ * Unit test for MultiTypeGenreAdapter
  */
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class MultiTypeBandAdapterTest {
+public class MultiTypeGenreAdapterTest {
 
   private Context context;
-  private List<Band> groups;
+  private List<Genre> groups;
 
   @Before
   public void setUp() throws Exception {
@@ -36,12 +36,12 @@ public class MultiTypeBandAdapterTest {
     assertNotNull(application);
 
     context = application;
-    groups = BandFactory.makeBands();
+    groups = GenreDataFactory.makeGenres();
   }
 
   @Test
   public void test_getItemViewType() {
-    MultiTypeBandAdapter adapter = new MultiTypeBandAdapter(groups);
+    MultiTypeGenreAdapter adapter = new MultiTypeGenreAdapter(groups);
 
     //initial state
     int initialExpected = ExpandableListPosition.GROUP;
@@ -51,7 +51,7 @@ public class MultiTypeBandAdapterTest {
 
     //expand first group
     adapter.toggleGroup(0);
-    int newExpected = MultiTypeBandAdapter.TOP_HIT_VIEW_TYPE;
+    int newExpected = MultiTypeGenreAdapter.FAVORITE_VIEW_TYPE;
     int newActual = adapter.getItemViewType(3);
 
     assertEquals(newExpected, newActual);
@@ -59,9 +59,9 @@ public class MultiTypeBandAdapterTest {
 
   @Test
   public void test_isChild() {
-    MultiTypeBandAdapter adapter = new MultiTypeBandAdapter(groups);
+    MultiTypeGenreAdapter adapter = new MultiTypeGenreAdapter(groups);
 
-    int validChildViewType = MultiTypeBandAdapter.SONG_VIEW_TYPE;
+    int validChildViewType = MultiTypeGenreAdapter.ARTIST_VIEW_TYPE;
     int inValidChildViewType = ExpandableListPosition.GROUP;
 
     assertTrue(adapter.isChild(validChildViewType));

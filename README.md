@@ -15,14 +15,14 @@ compile 'com.thoughtbot:expandablecheckrecyclerview:0.3'
 ```
 
 ## Usage
-Let's say you are a rock star :guitar: and you want to build an app to show a list of your favorite `Band`s with all their top `Song`s.
+Let's say you are a rock star :guitar: and you want to build an app to show a list of your favorite `Genre`s with a list of their top `Artist`s.
 
 First, define your custom `ExpandableGroup` class:
 
 ``` java
-public class Band extends ExpandableGroup<Song> {
+public class Genre extends ExpandableGroup<Artist> {
 
-  public Band(String title, List<Song> items) {
+  public Genre(String title, List<Artist> items) {
     super(title, items);
   }
 }
@@ -31,33 +31,33 @@ public class Band extends ExpandableGroup<Song> {
 Next up, let's create the `ChildViewHolder` and `GroupViewHolder`. These are both wrappers around regular ol' `RecyclerView.ViewHolder`s so implement any view inflation and binding methods you may need.
 
 ``` java
-public class BandViewHolder extends GroupViewHolder {
+public class GenreViewHolder extends GroupViewHolder
 
-  private TextView bandName;
+  private TextView genreTitle;
 
-  public BandViewHolder(View itemView) {
+  public GenreViewHolder(View itemView) {
     super(itemView);
-    bandName = itemView.findViewById(R.id.band_name);
+    genreTitle = itemView.findViewById(R.id.genre_title);
   }
 
-  public void setBandName(ExpandableGroup group) {
-    bandName.setText(group.getTitle());
+  public void setGenreTitle(ExpandableGroup group) {
+    genreTitle.setText(group.getTitle());
   }
 }
 ```
 
 ``` java
-public class SongViewHolder extends ChildViewHolder {
+public class ArtistViewHolder extends ChildViewHolder {
 
-  private TextView songTitle;
+  private TextView artistName;
 
-  public SongViewHolder(View itemView) {
+  public ArtistViewHolder(View itemView) {
     super(itemView);
-    songTitle = itemView.findViewById(R.id.song_name);
+    artistName = itemView.findViewById(R.id.artist_name);
   }
 
-  public void onBind(Song song) {
-    songTitle.setText(song.getTitle());
+  public void onBind(Artist artist) {
+    artistName.setText(artist.getTitle());
   }
 }
 ```
@@ -67,55 +67,55 @@ Now we are ready for the juicy part - let's make our `ExpandableRecyclerViewAdap
 By including your `GroupViewHolder` and `ChildViewHolder` in the definition of the class, you'll see that the `onCreateGroupViewHolder` and `onCreateChildViewHolder` methods return the correct type :thumbsup:
 
 ``` java
-public class BandAdapter extends ExpandableRecyclerViewAdapter<BandViewHolder, SongViewHolder> {
+public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder, ArtistViewHolder> {
 
-  public BandAdapter(List<? extends ExpandableGroup> groups) {
+  public GenreAdapter(List<? extends ExpandableGroup> groups) {
     super(groups);
   }
 
   @Override
-  public BandViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
-    View view = inflater.inflate(R.layout.list_item_band, parent, false);
-    return new BandViewHolder(view);
+  public GenreViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+    View view = inflater.inflate(R.layout.list_item_genre, parent, false);
+    return new GenreViewHolder(view);
   }
 
   @Override
-  public SongViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
-    View view = inflater.inflate(R.layout.list_item_song, parent, false);
-    return new SongViewHolder(view);
+  public ArtistViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
+    View view = inflater.inflate(R.layout.list_item_artist, parent, false);
+    return new ArtistViewHolder(view);
   }
 
   @Override
-  public void onBindChildViewHolder(SongViewHolder holder, int flatPosition, ExpandableGroup group,
+  public void onBindChildViewHolder(ArtistViewHolder holder, int flatPosition, ExpandableGroup group,
       int childIndex) {
-    final Song song = ((Band) group).getItems().get(childIndex);
-    holder.setSongName(song.getName());
+    final Artist artist = ((Artist) group).getItems().get(childIndex);
+    holder.setArtistName(artist.getName());
   }
 
   @Override
-  public void onBindGroupViewHolder(BandViewHolder holder, int flatPosition,
+  public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
       ExpandableGroup group) {
-    holder.setBandName(group);
+    holder.setGenreTitle(group);
   }
 }
 ```
 
-Lastly let's you'll need either an `Activity` or `Fragment` to host your adapter. Once you've got that up and running, all that's left if to instantiate your fancy new `BandAdapter` with a `List<Band>`
+Lastly let's you'll need either an `Activity` or `Fragment` to host your adapter. Once you've got that up and running, all that's left if to instantiate your fancy new `GenreAdapter` with a `List<Genre>`
 
 ``` java
-public class BandActivity extends Activity {
+public class GenreActivity extends Activity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 
     ...
 
-    List<Band> bands = getBands();
+    List<Genre> genres = getGenres();
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-    //instantiate your adapter with the list of bands
-    BandAdapter adapter = new BandAdapter(bands);
+    //instantiate your adapter with the list of genres
+    GenreAdapter adapter = new GenreAdapter(genres);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
 
@@ -130,7 +130,7 @@ public class BandActivity extends Activity {
 If you want to save the expand and collapse state of your adapter, you have to explicitly call through to the adapters `onSaveInstanceState()` and `onRestoreInstanceState()`in the calling `Activity`
 
 ```java
-public class BandActivity extends Activity {
+public class GenreActivity extends Activity {
 
   ...
 
@@ -154,7 +154,7 @@ public class BandActivity extends Activity {
 If you want to add a custom `Drawable` that animates based on a groups state, override the `expand()` and `collapse()` methods in your `GroupViewHolder`:
 
 ``` java
-public class BandViewHolder extends GroupViewHolder {
+public class GenreViewHolder extends GroupViewHolder {
 
   ...
 
@@ -192,32 +192,33 @@ If you want register an `ExpandCollapseListener` outside of the adapter, you can
 
 The `MultiTypeExpandableRecyclerViewAdapter` allows subclasses to implement multiple different view types for both children and groups.
 
-Continuing with our band example, let's say you wanted to display regular songs differently from top hits in the list. Let's start by making a new `TopHitViewHolder`
+Continuing with our genre example, let's say you wanted to display regular artists differently from your favorite artists. Let's start by making a new `FavoriteArtistViewHolder`
 
 ``` java
-public class TopHitViewHolder extends ChildViewHolder {
+public class FavoriteArtistViewHolder extends ChildViewHolder {
 
-  private TextView topHitName;
+  private TextView favoriteArtistName;
 
-  public TopHitViewHolder(View itemView) {
+  public FavoriteArtistViewHolder(View itemView) {
     super(itemView);
-    topHitName = (TextView) itemView.findViewById(R.id.list_item_top_hit_name);
+    favoriteArtistName = (TextView) itemView.findViewById(R.id.list_item_favorite_artist_name);
   }
 
-  public void setSongName(String name) {
-    topHitName.setText("Top Hit: " + name);
+  public void setArtistName(String name) {
+    favoriteArtistName.setText(name);
   }
 ```
 
-Just like the regular `SongViewHolder`, `TopHitViewHolder` must extends `ChildViewHolder`.
+Just like the regular `ArtistViewHolder`, `FavoriteArtistViewHolder` must extends `ChildViewHolder`.
 
-Next up, let's create a subclass of `MultiTypeExpandableRecyclerViewAdapter` called `MultiTypeBandAdapter` and let's add two static `int`s representing our two song view types:
+Next up, let's create a subclass of `MultiTypeExpandableRecyclerViewAdapter` called `MultiTypeGenreAdapter` and let's add two static `int`s representing our two artist view types:
 
 ```java
-public class MultiTypeBandAdapter extends MultiTypeExpandableRecyclerViewAdapter<BandViewHolder, ChildViewHolder> {
+public class MultiTypeGenreAdapter extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder> {
 
-  public static final int TOP_HIT_VIEW_TYPE = 3;
-  public static final int SONG_VIEW_TYPE = 4;
+
+  public static final int FAVORITE_VIEW_TYPE = 3;
+  public static final int ARTIST_VIEW_TYPE = 4;
   ...
 ```
 
@@ -228,10 +229,10 @@ Since we only want a single view type for groups, we only need to override `getC
 ``` java
   @Override
   public int getChildViewType(int position, ExpandableGroup group, int childIndex) {
-    if (((Band) group).getItems().get(childIndex).isTopHit()) {
-      return TOP_HIT_VIEW_TYPE;
+    if (((Genre) group).getItems().get(childIndex).isFavorite()) {
+      return FAVORITE_VIEW_TYPE;
     } else {
-      return SONG_VIEW_TYPE;
+      return ARTIST_VIEW_TYPE;
     }
   }
 ```
@@ -241,7 +242,7 @@ Since we provided custom view types for our children, we must also override `isC
 ```java
   @Override
   public boolean isChild(int viewType) {
-    return viewType == TOP_HIT_VIEW_TYPE || viewType == SONG_VIEW_TYPE;
+    return viewType == FAVORITE_VIEW_TYPE || viewType == ARTIST_VIEW_TYPE;
   }
 ```
 
@@ -250,12 +251,13 @@ And now, just like in any other `RecyclerView.Adapter` in our `onCreateChildView
   @Override
   public ChildViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
     switch (viewType) {
-      case SONG_VIEW_TYPE:
-        View song = from(parent.getContext()).inflate(R.layout.list_item_song, parent, false);
-        return new SongViewHolder(song);
-      case TOP_HIT_VIEW_TYPE:
-        View topHit = from(parent.getContext()).inflate(R.layout.list_item_top_hit, parent, false);
-        return new TopHitViewHolder(topHit);
+      case ARTIST_VIEW_TYPE:
+        View artist = from(parent.getContext()).inflate(R.layout.list_item_artist, parent, false);
+        return new ArtistViewHolder(artist);
+      case FAVORITE_VIEW_TYPE:
+        View favorite =
+            from(parent.getContext()).inflate(R.layout.list_item_favorite_artist, parent, false);
+        return new FavoriteArtistViewHolder(favorite);
       default:
         throw new IllegalArgumentException("Invalid viewType");
     }
@@ -265,13 +267,13 @@ And now, just like in any other `RecyclerView.Adapter` in our `onCreateChildView
   public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, ExpandableGroup group,
       int childIndex) {
     int viewType = getItemViewType(flatPosition);
-    Song song = ((Band) group).getItems().get(childIndex);
+    Artist artist = ((Genre) group).getItems().get(childIndex);
     switch (viewType) {
-      case SONG_VIEW_TYPE:
-        ((SongViewHolder) holder).setSongName(song.getName());
+      case ARTIST_VIEW_TYPE:
+        ((ArtistViewHolder) holder).setArtistName(artist.getName());
         break;
-      case TOP_HIT_VIEW_TYPE:
-        ((TopHitViewHolder) holder).setSongName(song.getName());
+      case FAVORITE_VIEW_TYPE:
+        ((FavoriteArtistViewHolder) holder).setArtistName(artist.getName());
     }
   }
 ```
@@ -296,18 +298,18 @@ The `CheckableChildRecyclerViewAdapter` has a `clearChoices()` which un checks a
 The `CheckableChildViewHolder` is a subclass of `ChildViewHolder` that has a `Checkable` widget. The `Checkable` interface is initially not set, so in order to see your children view states update, you must set a `View` that implements `Checkable` in your view holder.
 
 ``` java
-public class SingleCheckSongViewHolder extends CheckableChildViewHolder {
+public class SingleCheckArtistViewHolder extends CheckableChildViewHolder {
 
-  private CheckedTextView songName;
+  private CheckedTextView artistName;
 
-  public SongViewHolder(View itemView) {
+  public SingleCheckArtistViewHolder(View itemView) {
     super(itemView);
-    songName = (CheckedTextView) itemView.findViewById(R.id.song_name);
+    artistName = (CheckedTextView) itemView.findViewById(R.id.list_item_singlecheck_artist_name);
   }
 
   @Override
   public Checkable getCheckable() {
-    return songName;
+    return artistName;
   }
   ...
 }

@@ -4,11 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.widget.LinearLayout;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
-import com.thoughtbot.expandablerecyclerview.sample.expand.BandAdapter;
-import com.thoughtbot.expandablerecyclerview.sample.expand.SongViewHolder;
-import com.thoughtbot.expandablerecyclerview.sample.expand.BandViewHolder;
+import com.thoughtbot.expandablerecyclerview.sample.expand.GenreAdapter;
+import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
+import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +22,15 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Unit test for BandAdapter
+ * Unit test for GenreAdapter
  */
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class BandAdapterTest {
+public class GenreAdapterTest {
 
   private Context context;
-  private List<Band> groups;
+  private List<Genre> groups;
 
   @Before
   public void setUp() throws Exception {
@@ -40,26 +39,26 @@ public class BandAdapterTest {
     assertNotNull(application);
 
     context = application;
-    groups = BandFactory.makeBands();
+    groups = GenreDataFactory.makeGenres();
   }
 
   @Test
   public void test_onCreateViewHolder() {
-    BandAdapter adapter = new BandAdapter(groups);
+    GenreAdapter adapter = new GenreAdapter(groups);
     LinearLayout parent = new LinearLayout(context);
 
     //child view holder
     ViewHolder childViewHolder = adapter.onCreateViewHolder(parent, ExpandableListPosition.CHILD);
-    assertTrue(childViewHolder instanceof SongViewHolder);
+    assertTrue(childViewHolder instanceof ArtistViewHolder);
 
     //group view holder
     ViewHolder groupViewHolder = adapter.onCreateViewHolder(parent, ExpandableListPosition.GROUP);
-    assertTrue(groupViewHolder instanceof BandViewHolder);
+    assertTrue(groupViewHolder instanceof GenreViewHolder);
   }
 
   @Test
   public void test_getItemCount() {
-    BandAdapter adapter = new BandAdapter(groups);
+    GenreAdapter adapter = new GenreAdapter(groups);
 
     //initial state
     int initialExpected = 6;
@@ -70,7 +69,7 @@ public class BandAdapterTest {
 
   @Test
   public void test_getItemViewType() {
-    BandAdapter adapter = new BandAdapter(groups);
+    GenreAdapter adapter = new GenreAdapter(groups);
 
     //initial state
     int initialExpected = ExpandableListPosition.GROUP;

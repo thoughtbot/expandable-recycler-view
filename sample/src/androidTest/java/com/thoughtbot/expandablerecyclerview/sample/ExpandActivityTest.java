@@ -4,7 +4,7 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
-import com.thoughtbot.expandablerecyclerview.sample.expand.BandAdapter;
+import com.thoughtbot.expandablerecyclerview.sample.expand.GenreAdapter;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ExpandActivity;
 import org.junit.Before;
 import org.junit.Rule;
@@ -24,7 +24,7 @@ public class ExpandActivityTest {
       new ActivityTestRule<>(ExpandActivity.class);
 
   private RecyclerView recyclerView;
-  private BandAdapter adapter;
+  private GenreAdapter adapter;
 
   @Before
   public void setUp() {

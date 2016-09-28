@@ -6,14 +6,14 @@ import android.widget.CheckedTextView;
 import com.thoughtbot.expandablecheckrecyclerview.viewholders.CheckableChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 
-public class MultiCheckSongViewHolder extends CheckableChildViewHolder {
+public class MultiCheckArtistViewHolder extends CheckableChildViewHolder {
 
   private CheckedTextView childCheckedTextView;
 
-  public MultiCheckSongViewHolder(View itemView) {
+  public MultiCheckArtistViewHolder(View itemView) {
     super(itemView);
     childCheckedTextView =
-        (CheckedTextView) itemView.findViewById(R.id.list_item_multicheck_song_name);
+        (CheckedTextView) itemView.findViewById(R.id.list_item_multicheck_artist_name);
   }
 
   @Override
@@ -21,7 +21,7 @@ public class MultiCheckSongViewHolder extends CheckableChildViewHolder {
     return childCheckedTextView;
   }
 
-  public void setSongName(String songName) {
-    childCheckedTextView.setText(songName);
+  public void setArtistName(String artistName) {
+    childCheckedTextView.setText(artistName);
   }
 }
