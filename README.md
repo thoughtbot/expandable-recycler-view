@@ -6,12 +6,12 @@ Custom RecyclerViewAdapters for expanding and collapsing groups with support for
 ## Download
 ExpandableRecyclerView:
 ```groovy
-compile 'com.thoughtbot:expandablerecyclerview:1.0'
+compile 'com.thoughtbot:expandablerecyclerview:1.1'
 ```
 
 ExpandableCheckRecyclerView:
 ```groovy
-compile 'com.thoughtbot:expandablecheckrecyclerview:0.3'
+compile 'com.thoughtbot:expandablecheckrecyclerview:1.1'
 ```
 
 ## Usage
