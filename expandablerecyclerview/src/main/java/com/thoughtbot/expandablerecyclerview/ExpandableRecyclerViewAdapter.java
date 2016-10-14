@@ -141,7 +141,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * Triggered by a click on a {@link GroupViewHolder}
    *
    * @param flatPos the flat position of the {@link GroupViewHolder} that was clicked
-   * @return true if click expanded group, false if click collapsed group
+   * @return false if click expanded group, true if click collapsed group
    */
   @Override
   public boolean onGroupClick(int flatPos) {

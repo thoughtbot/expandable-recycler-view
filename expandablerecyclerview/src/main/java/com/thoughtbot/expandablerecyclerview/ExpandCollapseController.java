@@ -47,7 +47,6 @@ public class ExpandCollapseController {
   }
 
   /**
-   *
    * @param group the {@link ExpandableGroup} being checked for its collapsed state
    * @return true if {@code group} is expanded, false if it is collapsed
    */
@@ -67,7 +66,7 @@ public class ExpandCollapseController {
 
   /**
    * @param flatPos The flat list position of the group
-   * @return true if the group is expanded, *after* the toggle, false if the group is now collapsed
+   * @return false if the group is expanded, *after* the toggle, true if the group is now collapsed
    */
   public boolean toggleGroup(int flatPos) {
     ExpandableListPosition listPos = expandableList.getUnflattenedPosition(flatPos);
