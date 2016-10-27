@@ -372,9 +372,9 @@ Expandable RecyclerView is maintained by [@mandybess](https://github.com/mandybe
 
 Expandable RecyclerView is maintained and funded by thoughtbot, inc. The names and logos for thoughtbot are trademarks of thoughtbot, inc.
 
-We love open source software! See [our other projects][community] or [hire us][hire] to help build your product.
+We love open source software! See [our other projects][tools] or [hire us][hire] to help build your product.
 
-  [community]: https://thoughtbot.com/community?utm_source=github
+  [tools]: https://thoughtbot.com/tools?utm_source=github
   [hire]: https://thoughtbot.com/hire-us?utm_source=github
   [LICENSE]: /LICENSE
   [CONTRIBUTING]: CONTRIBUTING.md
