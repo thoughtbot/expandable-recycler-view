@@ -105,8 +105,7 @@ public class MultiTypeCheckGenreAdapter
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
-    outState.putParcelableArrayList(CHECKED_STATE_MAP,
-        (ArrayList<? extends Parcelable>) expandableList.groups);
+    outState.putParcelableArrayList(CHECKED_STATE_MAP, new ArrayList(expandableList.groups));
     super.onSaveInstanceState(outState);
   }
 

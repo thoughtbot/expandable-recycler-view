@@ -15,6 +15,7 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHolder, CCVH extends CheckableChildViewHolder>
@@ -79,8 +80,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
    */
   @Override
   public void onSaveInstanceState(Bundle outState) {
-    outState.putParcelableArrayList(CHECKED_STATE_MAP,
-        (ArrayList<? extends Parcelable>) expandableList.groups);
+    outState.putParcelableArrayList(CHECKED_STATE_MAP, new ArrayList(expandableList.groups));
     super.onSaveInstanceState(outState);
   }
 
