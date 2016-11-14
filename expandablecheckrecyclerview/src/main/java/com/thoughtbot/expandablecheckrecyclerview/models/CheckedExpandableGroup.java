@@ -1,8 +1,8 @@
 package com.thoughtbot.expandablecheckrecyclerview.models;
 
 import android.os.Parcel;
-import android.util.SparseBooleanArray;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,43 +10,43 @@ import java.util.List;
  */
 public abstract class CheckedExpandableGroup extends ExpandableGroup {
 
-  public SparseBooleanArray selectedChildren;
+  public boolean[] selectedChildren;
 
   public CheckedExpandableGroup(String title, List items) {
     super(title, items);
-    selectedChildren = new SparseBooleanArray();
+    selectedChildren = new boolean[items.size()];
     for (int i = 0; i < items.size(); i++) {
-      selectedChildren.put(i, false);
+      selectedChildren[i] = false;
     }
   }
 
-  void checkChild(int childIndex) {
-    selectedChildren.put(childIndex, true);
+  public void checkChild(int childIndex) {
+    selectedChildren[childIndex] = true;
   }
 
-  void unCheckChild(int childIndex) {
-    selectedChildren.put(childIndex, false);
+  public void unCheckChild(int childIndex) {
+    selectedChildren[childIndex] = false;
   }
 
   public boolean isChildChecked(int childIndex) {
-    return selectedChildren.get(childIndex);
+    return selectedChildren[childIndex];
   }
 
   public void clearSelections() {
     if (selectedChildren != null) {
-      selectedChildren.clear();
+      Arrays.fill(selectedChildren, false);
     }
   }
 
   protected CheckedExpandableGroup(Parcel in) {
     super(in);
-    selectedChildren = in.readSparseBooleanArray();
+    selectedChildren = in.createBooleanArray();
   }
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
-    dest.writeSparseBooleanArray(selectedChildren);
+    dest.writeBooleanArray(selectedChildren);
   }
 
   @Override
