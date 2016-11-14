@@ -11,7 +11,7 @@ compile 'com.thoughtbot:expandablerecyclerview:1.1'
 
 ExpandableCheckRecyclerView:
 ```groovy
-compile 'com.thoughtbot:expandablecheckrecyclerview:1.1'
+compile 'com.thoughtbot:expandablecheckrecyclerview:1.2'
 ```
 
 ## Usage

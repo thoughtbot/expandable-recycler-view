@@ -14,7 +14,7 @@ apply plugin: 'com.android.library'
 //  siteUrl = 'https://github.com/thoughtbot/expandable-recycler-view'
 //  gitUrl = 'https://github.com/thoughtbot/expandable-recycler-view.git'
 //
-//  libraryVersion = '1.1'
+//  libraryVersion = '1.2'
 //
 //  developerId = 'mandybess'
 //  developerName = 'Amanda Hill'
@@ -32,8 +32,8 @@ android {
   defaultConfig {
     minSdkVersion 16
     targetSdkVersion 23
-    versionCode 4
-    versionName "1.1"
+    versionCode 5
+    versionName "1.2"
   }
   buildTypes {
     release {
