@@ -2,7 +2,6 @@ package com.thoughtbot.expandablecheckrecyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.thoughtbot.expandablecheckrecyclerview.listeners.OnCheckChildClickListener;
@@ -15,7 +14,6 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHolder, CCVH extends CheckableChildViewHolder>
@@ -103,6 +101,22 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
     }
     expandableList.groups = savedInstanceState.getParcelableArrayList(CHECKED_STATE_MAP);
     super.onRestoreInstanceState(savedInstanceState);
+  }
+
+  /**
+   * Manually (programmatically) update the check state of a child
+   *
+   * @param checked the desired check state, true will check the item, false will uncheck it if
+   * possible
+   * @param groupIndex the index of the {@code ExpandableGroup} within {@code getGroups()}
+   * @param childIndex the index of the child within it's group
+   */
+  public void checkChild(boolean checked, int groupIndex, int childIndex) {
+    childCheckController.checkChild(checked, groupIndex, childIndex);
+    if (childClickListener != null) {
+      childClickListener.onCheckChildCLick(null, checked,
+          (CheckedExpandableGroup) expandableList.groups.get(groupIndex), childIndex);
+    }
   }
 
   /**

@@ -41,6 +41,15 @@ public class ChildCheckController {
     }
   }
 
+  public void checkChild(boolean checked, int groupIndex, int childIndex) {
+    CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.groups.get(groupIndex);
+    group.onChildClicked(childIndex, checked);
+    if (childrenUpdateListener != null) {
+      childrenUpdateListener.updateChildrenCheckState(
+          expandableList.getFlattenedFirstChildIndex(groupIndex), group.getItemCount());
+    }
+  }
+
   /**
    * @param listPosition the ExpandableListPosition representation of a child list item
    * @return The current checked state of the view

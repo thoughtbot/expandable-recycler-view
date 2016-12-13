@@ -37,6 +37,14 @@ public class MultiCheckActivity extends AppCompatActivity {
         adapter.clearChoices();
       }
     });
+
+    Button check = (Button) findViewById(R.id.check_first_child);
+    check.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        adapter.checkChild(true, 0, 3);
+      }
+    });
   }
 
   @Override

@@ -5,8 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 
+import static com.thoughtbot.expandablerecyclerview.sample.GenreDataFactory.makeClassicGenre;
 import static com.thoughtbot.expandablerecyclerview.sample.GenreDataFactory.makeGenres;
 
 public class ExpandActivity extends AppCompatActivity {
@@ -16,7 +20,7 @@ public class ExpandActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_expand);
+    setContentView(R.layout.activity_single_select);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setTitle(getClass().getSimpleName());
 
@@ -26,6 +30,14 @@ public class ExpandActivity extends AppCompatActivity {
     adapter = new GenreAdapter(makeGenres());
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
+
+    Button clear = (Button) findViewById(R.id.clear_button);
+    clear.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        adapter.toggleGroup(makeClassicGenre());
+      }
+    });
   }
 
   @Override

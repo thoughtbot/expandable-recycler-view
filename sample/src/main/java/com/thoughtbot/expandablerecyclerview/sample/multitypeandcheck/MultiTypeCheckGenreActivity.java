@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 
-import static com.thoughtbot.expandablerecyclerview.sample.GenreDataFactory.makeMultiCheckGenres;
 import static com.thoughtbot.expandablerecyclerview.sample.GenreDataFactory.makeSingleCheckGenres;
 
 public class MultiTypeCheckGenreActivity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class MultiTypeCheckGenreActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_select);
+    setContentView(R.layout.activity_single_select);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setTitle(getClass().getSimpleName());
 
