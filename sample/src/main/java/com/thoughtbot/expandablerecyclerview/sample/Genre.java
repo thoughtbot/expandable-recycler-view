@@ -15,5 +15,21 @@ public class Genre extends ExpandableGroup<Artist> {
   public int getIconResId() {
     return iconResId;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Genre)) return false;
+
+    Genre genre = (Genre) o;
+
+    return getIconResId() == genre.getIconResId();
+
+  }
+
+  @Override
+  public int hashCode() {
+    return getIconResId();
+  }
 }
 

@@ -94,6 +94,34 @@ public class ExpandableList {
   }
 
   /**
+   * @param groupIndex representing the index of a group within {@link #groups}
+   * @return the index of a group within the {@link #getVisibleItemCount()}
+   */
+  public int getFlattenedGroupIndex(int groupIndex) {
+    int runningTotal = 0;
+
+    for (int i = 0; i < groupIndex; i++) {
+      runningTotal += numberOfVisibleItemsInGroup(i);
+    }
+    return runningTotal;
+  }
+
+  /**
+   * @param group an {@link ExpandableGroup} within {@link #groups}
+   * @return the index of a group within the {@link #getVisibleItemCount()} or 0 if the
+   * groups.indexOf cannot find the group
+   */
+  public int getFlattenedGroupIndex(ExpandableGroup group) {
+    int groupIndex = groups.indexOf(group);
+    int runningTotal = 0;
+
+    for (int i = 0; i < groupIndex; i++) {
+      runningTotal += numberOfVisibleItemsInGroup(i);
+    }
+    return runningTotal;
+  }
+
+  /**
    * Converts a child position to a flat list position.
    *
    * @param packedPosition The child positions to be converted in it's
@@ -121,6 +149,30 @@ public class ExpandableList {
       runningTotal += numberOfVisibleItemsInGroup(i);
     }
     return runningTotal + childIndex + 1;
+  }
+
+  /**
+   * Converts the details of a child's position to a flat list position.
+   *
+   * @param groupIndex The index of a group within {@link #groups}
+   * @param childIndex the index of a child within it's {@link ExpandableGroup}
+   * @return The flat list position for the given child
+   */
+  public int getFlattenedChildIndex(int groupIndex, int childIndex) {
+    int runningTotal = 0;
+
+    for (int i = 0; i < groupIndex; i++) {
+      runningTotal += numberOfVisibleItemsInGroup(i);
+    }
+    return runningTotal + childIndex + 1;
+  }
+
+  /**
+   * @param groupIndex The index of a group within {@link #groups}
+   * @return The flat list position for the first child in a group
+   */
+  public int getFlattenedFirstChildIndex(int groupIndex) {
+    return getFlattenedGroupIndex(groupIndex) + 1;
   }
 
   /**

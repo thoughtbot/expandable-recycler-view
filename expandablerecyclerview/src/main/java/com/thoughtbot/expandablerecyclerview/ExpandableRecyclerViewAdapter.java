@@ -159,6 +159,14 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
   }
 
   /**
+   * @param group the {@link ExpandableGroup} being toggled
+   * @return true if the group is expanded, *after* the toggle, false if the group is now collapsed
+   */
+  public boolean toggleGroup(ExpandableGroup group) {
+    return expandCollapseController.toggleGroup(group);
+  }
+
+  /**
    * @param flatPos the flattened position of an item in the list
    * @return true if {@code group} is expanded, false if it is collapsed
    */
