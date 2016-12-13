@@ -1,6 +1,5 @@
 package com.thoughtbot.expandablerecyclerview.models;
 
-import android.util.SparseBooleanArray;
 import java.util.List;
 
 /*
@@ -17,14 +16,14 @@ import java.util.List;
 public class ExpandableList {
 
   public List<? extends ExpandableGroup> groups;
-  public SparseBooleanArray expandedGroupIndexes;
+  public boolean[] expandedGroupIndexes;
 
   public ExpandableList(List<? extends ExpandableGroup> groups) {
     this.groups = groups;
 
-    expandedGroupIndexes = new SparseBooleanArray();
+    expandedGroupIndexes = new boolean[groups.size()];
     for (int i = 0; i < groups.size(); i++) {
-      expandedGroupIndexes.put(i, false);
+      expandedGroupIndexes[i] = false;
     }
   }
 
@@ -35,7 +34,7 @@ public class ExpandableList {
    * group + 1 for the group header
    */
   private int numberOfVisibleItemsInGroup(int group) {
-    if (expandedGroupIndexes.get(group)) {
+    if (expandedGroupIndexes[group]) {
       return groups.get(group).getItemCount() + 1;
     } else {
       return 1;

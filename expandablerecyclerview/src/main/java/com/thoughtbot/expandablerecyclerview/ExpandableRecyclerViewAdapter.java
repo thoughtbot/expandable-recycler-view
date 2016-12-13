@@ -11,7 +11,6 @@ import com.thoughtbot.expandablerecyclerview.listeners.OnGroupClickListener;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableList;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
-import com.thoughtbot.expandablerecyclerview.models.SparseBooleanArrayParcelable;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.List;
@@ -188,8 +187,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * expanded state map
    */
   public void onSaveInstanceState(Bundle savedInstanceState) {
-    savedInstanceState.putParcelable(EXPAND_STATE_MAP,
-        new SparseBooleanArrayParcelable(expandableList.expandedGroupIndexes));
+    savedInstanceState.putBooleanArray(EXPAND_STATE_MAP, expandableList.expandedGroupIndexes);
   }
 
   /**
@@ -208,7 +206,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     if (savedInstanceState == null || !savedInstanceState.containsKey(EXPAND_STATE_MAP)) {
       return;
     }
-    expandableList.expandedGroupIndexes = savedInstanceState.getParcelable(EXPAND_STATE_MAP);
+    expandableList.expandedGroupIndexes = savedInstanceState.getBooleanArray(EXPAND_STATE_MAP);
     notifyDataSetChanged();
   }
 

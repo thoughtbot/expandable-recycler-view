@@ -26,7 +26,7 @@ public class ExpandCollapseController {
    * @param listPosition position of the group to collapse
    */
   private void collapseGroup(ExpandableListPosition listPosition) {
-    expandableList.expandedGroupIndexes.put(listPosition.groupPos, false);
+    expandableList.expandedGroupIndexes[listPosition.groupPos] = false;
     if (listener != null) {
       listener.onGroupCollapsed(expandableList.getFlattenedGroupIndex(listPosition) + 1,
           expandableList.groups.get(listPosition.groupPos).getItemCount());
@@ -39,7 +39,7 @@ public class ExpandCollapseController {
    * @param listPosition the group to be expanded
    */
   private void expandGroup(ExpandableListPosition listPosition) {
-    expandableList.expandedGroupIndexes.put(listPosition.groupPos, true);
+    expandableList.expandedGroupIndexes[listPosition.groupPos] = true;
     if (listener != null) {
       listener.onGroupExpanded(expandableList.getFlattenedGroupIndex(listPosition) + 1,
           expandableList.groups.get(listPosition.groupPos).getItemCount());
@@ -52,7 +52,7 @@ public class ExpandCollapseController {
    */
   public boolean isGroupExpanded(ExpandableGroup group) {
     int groupIndex = expandableList.groups.indexOf(group);
-    return expandableList.expandedGroupIndexes.get(groupIndex);
+    return expandableList.expandedGroupIndexes[groupIndex];
   }
 
   /**
@@ -61,7 +61,7 @@ public class ExpandCollapseController {
    */
   public boolean isGroupExpanded(int flatPos) {
     ExpandableListPosition listPosition = expandableList.getUnflattenedPosition(flatPos);
-    return expandableList.expandedGroupIndexes.get(listPosition.groupPos);
+    return expandableList.expandedGroupIndexes[listPosition.groupPos];
   }
 
   /**
@@ -70,7 +70,7 @@ public class ExpandCollapseController {
    */
   public boolean toggleGroup(int flatPos) {
     ExpandableListPosition listPos = expandableList.getUnflattenedPosition(flatPos);
-    boolean expanded = expandableList.expandedGroupIndexes.get(listPos.groupPos);
+    boolean expanded = expandableList.expandedGroupIndexes[listPos.groupPos];
     if (expanded) {
       collapseGroup(listPos);
     } else {
