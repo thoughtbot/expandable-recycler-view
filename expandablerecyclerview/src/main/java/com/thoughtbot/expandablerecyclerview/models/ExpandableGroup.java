@@ -39,8 +39,9 @@ public class ExpandableGroup<T extends Parcelable> implements Parcelable {
 
   protected ExpandableGroup(Parcel in) {
     title = in.readString();
-    if (in.readByte() == 0x01) {
-      int size = in.readInt();
+    byte hasItems = in.readByte();
+    int size = in.readInt();
+    if (hasItems == 0x01) {
       items = new ArrayList<T>(size);
       Class<?> type = (Class<?>) in.readSerializable();
       in.readList(items, type.getClassLoader());
