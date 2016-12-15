@@ -1,0 +1,28 @@
+#
+# Build configuration for Circle CI
+#
+general:
+  artifacts:
+    - "app/build/outputs/apk"
+    - "app/build/reports/tests"
+    - "app/build/outputs/androidTest-results"
+
+machine:
+  timezone:
+    America/Los_Angeles
+  java:
+    version: oraclejdk8
+  environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+
+dependencies:
+  pre:
+    - source environmentSetup.sh && get_android_sdk_24
+    - mkdir -p $ANDROID_HOME"/licenses"
+    - echo $ANDROID_SDK_LICENSE > $ANDROID_HOME"/licenses/android-sdk-license"
+  override:
+    - ./gradlew clean assembleRelease -PdisablePreDex
+
+test:
+  override:
+    - ./gradlew testRelease
