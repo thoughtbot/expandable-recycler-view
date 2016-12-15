@@ -113,10 +113,13 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    */
   @Override
   public void onGroupExpanded(int positionStart, int itemCount) {
-    notifyItemRangeInserted(positionStart, itemCount);
-    if (expandCollapseListener != null) {
-      int groupIndex = expandableList.getUnflattenedPosition(positionStart).groupPos;
-      expandCollapseListener.onGroupExpanded(getGroups().get(groupIndex));
+    // only insert if there items to insert
+    if (itemCount > 0) {
+      notifyItemRangeInserted(positionStart, itemCount);
+      if (expandCollapseListener != null) {
+        int groupIndex = expandableList.getUnflattenedPosition(positionStart).groupPos;
+        expandCollapseListener.onGroupExpanded(getGroups().get(groupIndex));
+      }
     }
   }
 
@@ -128,11 +131,14 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    */
   @Override
   public void onGroupCollapsed(int positionStart, int itemCount) {
-    notifyItemRangeRemoved(positionStart, itemCount);
-    if (expandCollapseListener != null) {
-      //minus one to return the position of the header, not first child
-      int groupIndex = expandableList.getUnflattenedPosition(positionStart - 1).groupPos;
-      expandCollapseListener.onGroupCollapsed(getGroups().get(groupIndex));
+    // only remote if there items to remove
+    if (itemCount > 0) {
+      notifyItemRangeRemoved(positionStart, itemCount);
+      if (expandCollapseListener != null) {
+        //minus one to return the position of the header, not first child
+        int groupIndex = expandableList.getUnflattenedPosition(positionStart - 1).groupPos;
+        expandCollapseListener.onGroupCollapsed(getGroups().get(groupIndex));
+      }
     }
   }
 
