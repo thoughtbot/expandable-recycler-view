@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.ViewGroup;
 import com.thoughtbot.expandablerecyclerview.listeners.ExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.listeners.GroupExpandCollapseListener;
@@ -71,12 +72,19 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * ExpandableList#getVisibleItemCount()} in the list at which to bind
    */
   @Override
-  public void onBindViewHolder(ViewHolder holder, int position) {
+  public void onBindViewHolder(final ViewHolder holder, final int position) {
     ExpandableListPosition listPos = expandableList.getUnflattenedPosition(position);
     ExpandableGroup group = expandableList.getExpandableGroup(listPos);
     switch (listPos.type) {
       case ExpandableListPosition.GROUP:
         onBindGroupViewHolder((GVH) holder, position, group);
+        boolean isGroupExpanded = isGroupExpanded(position);
+        Log.d("amandaaaaaaaa", "is group expanded: " + isGroupExpanded);
+        if (isGroupExpanded) {
+          ((GVH) holder).expand();
+        } else {
+          ((GVH) holder).collapse();
+        }
         break;
       case ExpandableListPosition.CHILD:
         onBindChildViewHolder((CVH) holder, position, group, listPos.childPos);
@@ -116,6 +124,11 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     // only insert if there items to insert
     if (itemCount > 0) {
       notifyItemRangeInserted(positionStart, itemCount);
+
+      //update group item view state
+      int groupItemIndex = positionStart - 1;
+      notifyItemChanged(groupItemIndex);
+
       if (expandCollapseListener != null) {
         int groupIndex = expandableList.getUnflattenedPosition(positionStart).groupPos;
         expandCollapseListener.onGroupExpanded(getGroups().get(groupIndex));
@@ -134,6 +147,11 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     // only remote if there items to remove
     if (itemCount > 0) {
       notifyItemRangeRemoved(positionStart, itemCount);
+
+      //update group item view state
+      int groupItemIndex = positionStart - 1;
+      notifyItemChanged(groupItemIndex);
+
       if (expandCollapseListener != null) {
         //minus one to return the position of the header, not first child
         int groupIndex = expandableList.getUnflattenedPosition(positionStart - 1).groupPos;

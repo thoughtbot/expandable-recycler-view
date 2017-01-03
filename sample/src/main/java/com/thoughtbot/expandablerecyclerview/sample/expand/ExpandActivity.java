@@ -3,6 +3,7 @@ package com.thoughtbot.expandablerecyclerview.sample.expand;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,6 +27,11 @@ public class ExpandActivity extends AppCompatActivity {
 
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+    RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator(); // your recycler view here
+    if (animator instanceof DefaultItemAnimator) {
+      ((DefaultItemAnimator) animator).setSupportsChangeAnimations(false);
+    }
 
     adapter = new GenreAdapter(makeGenres());
     recyclerView.setLayoutManager(layoutManager);
