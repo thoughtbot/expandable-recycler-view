@@ -49,7 +49,7 @@ public class ExpandableListTest {
     assertEquals(initialExpected, initialActual);
 
     //expand first group
-    list.expandedGroupIndexes.put(0, true);
+    list.expandedGroupIndexes[0] = true;
 
     //new state
     int newExpected = 9;
@@ -71,7 +71,7 @@ public class ExpandableListTest {
     assertEquals(initialExpected, initialActual);
 
     //expand first group
-    list.expandedGroupIndexes.put(0, true);
+    list.expandedGroupIndexes[0] = true;
 
     //flatPos 3 == child number 2 within group at index 0
     ExpandableListPosition newExpected = obtain(CHILD, 0, 2, 3);
