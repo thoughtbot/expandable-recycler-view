@@ -61,7 +61,7 @@ public class GenreAdapterTest {
     GenreAdapter adapter = new GenreAdapter(groups);
 
     //initial state
-    int initialExpected = 6;
+    int initialExpected = 5;
     int initialActual = adapter.getItemCount();
 
     assertEquals(initialExpected, initialActual);

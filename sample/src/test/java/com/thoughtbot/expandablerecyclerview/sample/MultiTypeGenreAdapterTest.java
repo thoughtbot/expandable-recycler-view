@@ -51,7 +51,7 @@ public class MultiTypeGenreAdapterTest {
 
     //expand first group
     adapter.toggleGroup(0);
-    int newExpected = MultiTypeGenreAdapter.FAVORITE_VIEW_TYPE;
+    int newExpected = MultiTypeGenreAdapter.ARTIST_VIEW_TYPE;
     int newActual = adapter.getItemViewType(3);
 
     assertEquals(newExpected, newActual);
