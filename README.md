@@ -1,3 +1,5 @@
+![logo](https://images.thoughtbot.com/blog-vellum-image-uploads/lpMtQDMlRindAIJOHlGl_expandable-recycler-view-logo.png)
+
 # Expandable RecyclerView
 Custom RecyclerViewAdapters for expanding and collapsing groups with support for multiple view types
 
