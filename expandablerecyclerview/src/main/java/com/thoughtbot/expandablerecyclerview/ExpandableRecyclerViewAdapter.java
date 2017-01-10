@@ -77,6 +77,12 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     switch (listPos.type) {
       case ExpandableListPosition.GROUP:
         onBindGroupViewHolder((GVH) holder, position, group);
+
+        if (isGroupExpanded(group)) {
+          ((GVH) holder).expand();
+        } else {
+          ((GVH) holder).collapse();
+        }
         break;
       case ExpandableListPosition.CHILD:
         onBindChildViewHolder((CVH) holder, position, group, listPos.childPos);
@@ -113,6 +119,10 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    */
   @Override
   public void onGroupExpanded(int positionStart, int itemCount) {
+    //update header
+    int headerPosition = positionStart - 1;
+    notifyItemChanged(headerPosition);
+
     // only insert if there items to insert
     if (itemCount > 0) {
       notifyItemRangeInserted(positionStart, itemCount);
@@ -131,6 +141,10 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    */
   @Override
   public void onGroupCollapsed(int positionStart, int itemCount) {
+    //update header
+    int headerPosition = positionStart - 1;
+    notifyItemChanged(headerPosition);
+
     // only remote if there items to remove
     if (itemCount > 0) {
       notifyItemRangeRemoved(positionStart, itemCount);

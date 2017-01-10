@@ -59,6 +59,12 @@ public abstract class MultiTypeExpandableRecyclerViewAdapter<GVH extends GroupVi
     ExpandableGroup group = expandableList.getExpandableGroup(listPos);
     if (isGroup(getItemViewType(position))) {
       onBindGroupViewHolder((GVH) holder, position, group);
+
+      if (isGroupExpanded(group)) {
+        ((GVH) holder).expand();
+      } else {
+        ((GVH) holder).collapse();
+      }
     } else if (isChild(getItemViewType(position))) {
       onBindChildViewHolder((CVH) holder, position, group, listPos.childPos);
     }
