@@ -82,7 +82,7 @@ public class ExpandCollapseController {
   public boolean toggleGroup(ExpandableGroup group) {
     ExpandableListPosition listPos =
         expandableList.getUnflattenedPosition(expandableList.getFlattenedGroupIndex(group));
-    boolean expanded = isGroupExpanded(listPos.groupPos);
+    boolean expanded = expandableList.expandedGroupIndexes[listPos.groupPos];
     if (expanded) {
       collapseGroup(listPos);
     } else {
