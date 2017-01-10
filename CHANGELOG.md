@@ -1,7 +1,14 @@
 # Changelog
 
-## 1.4 - Next Release
+## Version 1.4 - Next Release
 - Upgrade Robolectric version to `3.2.1`
+- Fix how `GroupViewHolder`'s expand and collapse method are called
+- Avoid unnecessary conversion between `ExpandableListPosition` and group index
+- Add layout for each sample activity
+- Only update children check states if group is expanded
+- Update how `clearChoices()` propagates view updates
+- Remove unnecessary check for only `CheckedTextView` and toggle everything in `CheckableChildViewHolder`
+- Update `ExpandActivity` sample to turn off flash animation
 
 ## Version 1.3 - December 15th 2016
 - Add ability to programmatically toggle group using group
