@@ -45,8 +45,12 @@ public class ChildCheckController {
     CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.groups.get(groupIndex);
     group.onChildClicked(childIndex, checked);
     if (childrenUpdateListener != null) {
-      childrenUpdateListener.updateChildrenCheckState(
-          expandableList.getFlattenedFirstChildIndex(groupIndex), group.getItemCount());
+      //only update children check states if group is expanded
+      boolean isGroupExpanded = expandableList.expandedGroupIndexes[groupIndex];
+      if (isGroupExpanded) {
+        childrenUpdateListener.updateChildrenCheckState(
+            expandableList.getFlattenedFirstChildIndex(groupIndex), group.getItemCount());
+      }
     }
   }
 
