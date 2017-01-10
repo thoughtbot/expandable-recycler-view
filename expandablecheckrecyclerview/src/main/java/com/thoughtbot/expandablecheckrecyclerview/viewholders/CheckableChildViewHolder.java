@@ -3,10 +3,7 @@ package com.thoughtbot.expandablecheckrecyclerview.viewholders;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Checkable;
-import android.widget.CheckedTextView;
-import com.thoughtbot.expandablecheckrecyclerview.ChildCheckController;
 import com.thoughtbot.expandablecheckrecyclerview.listeners.OnChildCheckChangedListener;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 /**
@@ -36,9 +33,7 @@ public abstract class CheckableChildViewHolder extends ChildViewHolder implement
 
   @Override
   public void onClick(View v) {
-    if (checkable instanceof CheckedTextView) {
-      checkable.toggle();
-    }
+    checkable.toggle();
     if (listener != null) {
       listener.onChildCheckChanged(v, checkable.isChecked(), getAdapterPosition());
     }
