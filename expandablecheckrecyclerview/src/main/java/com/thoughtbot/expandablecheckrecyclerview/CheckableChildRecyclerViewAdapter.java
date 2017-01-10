@@ -124,7 +124,14 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
    */
   public void clearChoices() {
     childCheckController.clearCheckStates();
-    notifyDataSetChanged();
+
+    //only update the child views that are visible (i.e. their group is expanded)
+    for (int i = 0; i < getGroups().size(); i++) {
+      ExpandableGroup group = getGroups().get(i);
+      if (isGroupExpanded(group)) {
+        notifyItemRangeChanged(expandableList.getFlattenedFirstChildIndex(i), group.getItemCount());
+      }
+    }
   }
 
   /**

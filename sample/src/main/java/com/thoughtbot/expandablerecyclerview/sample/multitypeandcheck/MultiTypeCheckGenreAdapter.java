@@ -1,7 +1,6 @@
 package com.thoughtbot.expandablerecyclerview.sample.multitypeandcheck;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,7 +119,14 @@ public class MultiTypeCheckGenreAdapter
 
   public void clearChoices() {
     childCheckController.clearCheckStates();
-    notifyDataSetChanged();
+
+    //only update the child views that are visible (i.e. their group is expanded)
+    for (int i = 0; i < getGroups().size(); i++) {
+      ExpandableGroup group = getGroups().get(i);
+      if (isGroupExpanded(group)) {
+        notifyItemRangeChanged(expandableList.getFlattenedFirstChildIndex(i), group.getItemCount());
+      }
+    }
   }
 
   @Override
