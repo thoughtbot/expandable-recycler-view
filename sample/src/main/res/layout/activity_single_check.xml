@@ -5,15 +5,15 @@
   android:orientation="vertical">
 
   <Button
-    android:id="@+id/toggle_button"
+    android:id="@+id/clear_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Toggle Classic Group" />
+    android:text="clear selections" />
+
 
   <android.support.v7.widget.RecyclerView
     android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/toggle_button" />
-
+    android:layout_below="@id/clear_button" />
 </RelativeLayout>

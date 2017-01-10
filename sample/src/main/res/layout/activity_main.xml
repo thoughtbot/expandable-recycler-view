@@ -27,12 +27,12 @@
     android:id="@+id/mixedtype_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Mixed Type Sample" />
+    android:text="Multi Type Sample" />
 
   <Button
     android:id="@+id/mixedtype_check_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Mixed Type And Check Sample" />
+    android:text="Multi Type And Check Sample" />
 
 </LinearLayout>

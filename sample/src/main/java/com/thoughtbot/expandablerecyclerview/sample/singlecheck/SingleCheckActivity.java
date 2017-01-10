@@ -19,7 +19,7 @@ public class SingleCheckActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_single_select);
+    setContentView(R.layout.activity_single_check);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setTitle(getClass().getSimpleName());
 

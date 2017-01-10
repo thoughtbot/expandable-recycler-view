@@ -16,7 +16,7 @@ public class MultiTypeActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_expand);
+    setContentView(R.layout.activity_multi_type);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setTitle(getClass().getSimpleName());
 

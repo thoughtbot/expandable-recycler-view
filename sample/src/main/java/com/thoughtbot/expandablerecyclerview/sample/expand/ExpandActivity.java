@@ -20,7 +20,7 @@ public class ExpandActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_single_select);
+    setContentView(R.layout.activity_expand);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setTitle(getClass().getSimpleName());
 
@@ -31,7 +31,7 @@ public class ExpandActivity extends AppCompatActivity {
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
 
-    Button clear = (Button) findViewById(R.id.clear_button);
+    Button clear = (Button) findViewById(R.id.toggle_button);
     clear.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
