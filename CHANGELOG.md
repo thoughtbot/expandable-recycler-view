@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 1.4 - Next Release
+## Version 1.4 - January 17th 2017
 - Upgrade Robolectric version to `3.2.1`
 - Fix how `GroupViewHolder`'s expand and collapse method are called
 - Avoid unnecessary conversion between `ExpandableListPosition` and group index
