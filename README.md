@@ -33,7 +33,7 @@ public class Genre extends ExpandableGroup<Artist> {
 Next up, let's create the `ChildViewHolder` and `GroupViewHolder`. These are both wrappers around regular ol' `RecyclerView.ViewHolder`s so implement any view inflation and binding methods you may need.
 
 ``` java
-public class GenreViewHolder extends GroupViewHolder
+public class GenreViewHolder extends GroupViewHolder {
 
   private TextView genreTitle;
 
@@ -58,7 +58,7 @@ public class ArtistViewHolder extends ChildViewHolder {
     artistName = itemView.findViewById(R.id.artist_name);
   }
 
-  public void onBind(Artist artist) {
+  public void setArtistName(Artist artist) {
     artistName.setText(artist.getTitle());
   }
 }
@@ -88,21 +88,19 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
   }
 
   @Override
-  public void onBindChildViewHolder(ArtistViewHolder holder, int flatPosition, ExpandableGroup group,
-      int childIndex) {
-    final Artist artist = ((Artist) group).getItems().get(childIndex);
+  public void onBindChildViewHolder(ArtistViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
+    final Artist artist = ((Genre) group).getItems().get(childIndex);
     holder.setArtistName(artist.getName());
   }
 
   @Override
-  public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
+  public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition, ExpandableGroup group) {
     holder.setGenreTitle(group);
   }
 }
 ```
 
-Lastly let's you'll need either an `Activity` or `Fragment` to host your adapter. Once you've got that up and running, all that's left if to instantiate your fancy new `GenreAdapter` with a `List<Genre>`
+Lastly you'll need either an `Activity` or `Fragment` to host your adapter. Once you've got that up and running, all that's left is to instantiate your fancy new `GenreAdapter` with a `List<Genre>`
 
 ``` java
 public class GenreActivity extends Activity {
@@ -112,7 +110,7 @@ public class GenreActivity extends Activity {
 
     ...
 
-    List<Genre> genres = getGenres();
+    List<Genre> genres = getGenres(); //see sample project's GenreDataFactory.java class for getGenres() method
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
