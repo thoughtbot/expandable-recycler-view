@@ -246,6 +246,11 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     expandCollapseListener = listener;
   }
 
+  public void refresh(List<? extends ExpandableGroup> groups){
+    this.expandableList = new ExpandableList(groups);
+    expandCollapseController.refreshData(expandableList);
+  }
+
   /**
    * The full list of {@link ExpandableGroup} backing this RecyclerView
    *
