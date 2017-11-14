@@ -61,10 +61,8 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
   /**
    * Implementation of Adapter.onBindViewHolder(RecyclerView.ViewHolder, int)
    * that determines if the list item is a group or a child and calls through
-   * to the appropriate implementation of either {@link #onBindGroupViewHolder(GroupViewHolder,
-   * int,
-   * ExpandableGroup)}
-   * or {@link #onBindChildViewHolder(ChildViewHolder, int, ExpandableGroup, int)}.
+   * to the appropriate implementation of either {@link #onBindGroupViewHolder(GroupViewHolder, int, ExpandableGroup, int)}
+   * or {@link #onBindChildViewHolder(ChildViewHolder, int, ExpandableGroup, int, int)}.
    *
    * @param holder Either the GroupViewHolder or the ChildViewHolder to bind data to
    * @param position The flat position (or index in the list of {@link
@@ -76,7 +74,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     ExpandableGroup group = expandableList.getExpandableGroup(listPos);
     switch (listPos.type) {
       case ExpandableListPosition.GROUP:
-        onBindGroupViewHolder((GVH) holder, position, group);
+        onBindGroupViewHolder((GVH) holder, position, group, listPos.groupPos);
 
         if (isGroupExpanded(group)) {
           ((GVH) holder).expand();
@@ -85,7 +83,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
         }
         break;
       case ExpandableListPosition.CHILD:
-        onBindChildViewHolder((CVH) holder, position, group, listPos.childPos);
+        onBindChildViewHolder((CVH) holder, position, group, listPos.groupPos, listPos.childPos);
         break;
     }
   }
@@ -278,24 +276,25 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * bound to is a  child.
    * <p>
    * Bind data to the {@link CVH} here.
-   *
-   * @param holder The {@code CVH} to bind data to
+   *  @param holder The {@code CVH} to bind data to
    * @param flatPosition the flat position (raw index) in the list at which to bind the child
    * @param group The {@link ExpandableGroup} that the the child list item belongs to
-   * @param childIndex the index of this child within it's {@link ExpandableGroup}
+   * @param groupIndex The index of the group this child belongs to
+   * @param childIndex The index of this child within it's {@link ExpandableGroup}
    */
   public abstract void onBindChildViewHolder(CVH holder, int flatPosition, ExpandableGroup group,
-      int childIndex);
+                                             int groupIndex, int childIndex);
 
   /**
    * Called from onBindViewHolder(RecyclerView.ViewHolder, int) when the list item bound to is a
    * group
    * <p>
    * Bind data to the {@link GVH} here.
-   *
-   * @param holder The {@code GVH} to bind data to
+   *  @param holder The {@code GVH} to bind data to
    * @param flatPosition the flat position (raw index) in the list at which to bind the group
    * @param group The {@link ExpandableGroup} to be used to bind data to this {@link GVH}
+   * @param groupIndex The index of the group this child belongs to
    */
-  public abstract void onBindGroupViewHolder(GVH holder, int flatPosition, ExpandableGroup group);
+  public abstract void onBindGroupViewHolder(GVH holder, int flatPosition, ExpandableGroup group,
+                                             int groupIndex);
 }

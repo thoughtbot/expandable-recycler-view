@@ -72,7 +72,7 @@ public class ExpandableList {
       if (adapted == 0) {
         return ExpandableListPosition.obtain(ExpandableListPosition.GROUP, i, -1, flPos);
       } else if (adapted < groupItemCount) {
-        return ExpandableListPosition.obtain(ExpandableListPosition.CHILD, i, adapted - 1, flPos);
+        return ExpandableListPosition.obtain(ExpandableListPosition.GROUP, i, adapted - 1, flPos);
       }
       adapted -= groupItemCount;
     }
