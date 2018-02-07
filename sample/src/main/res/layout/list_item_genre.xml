@@ -28,7 +28,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical|end"
     android:layout_marginRight="@dimen/horizontal_margin"
-    android:src="@drawable/ic_arrow_down" />
+    android:src="@drawable/selecter_arrow" />
 
 </FrameLayout>
 

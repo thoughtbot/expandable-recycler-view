@@ -44,7 +44,7 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation 'com.thoughtbot:expandablerecyclerview:1.3'
+  implementation project(':expandablerecyclerview')
 
   //android
   implementation 'com.android.support:appcompat-v7:26.0.2'

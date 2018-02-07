@@ -43,27 +43,29 @@ public class GenreViewHolder extends GroupViewHolder {
 
   @Override
   public void expand() {
-    animateExpand();
+    arrow.setSelected(true);
   }
 
   @Override
   public void collapse() {
-    animateCollapse();
+    arrow.setSelected(false);
   }
 
-  private void animateExpand() {
-    RotateAnimation rotate =
-        new RotateAnimation(360, 180, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
-    rotate.setDuration(300);
-    rotate.setFillAfter(true);
-    arrow.setAnimation(rotate);
+  @Override
+  public void animateExpand() {
+    arrow.setAnimation(makeRorate(180, 360));
   }
 
-  private void animateCollapse() {
+  @Override
+  public void animateCollapse() {
+    arrow.setAnimation(makeRorate(360, 180));
+  }
+
+  private RotateAnimation makeRorate(float fromDegrees, float toDegrees) {
     RotateAnimation rotate =
-        new RotateAnimation(180, 360, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
+        new RotateAnimation(fromDegrees, toDegrees, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
     rotate.setDuration(300);
     rotate.setFillAfter(true);
-    arrow.setAnimation(rotate);
+    return rotate;
   }
 }

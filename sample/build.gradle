@@ -23,8 +23,8 @@ android {
 
 dependencies {
   implementation project(':expandablecheckrecyclerview')
-  //android
   implementation project(':expandablerecyclerview')
+  //android
   implementation 'com.android.support:appcompat-v7:26.0.2'
   implementation 'com.android.support:recyclerview-v7:26.0.2'
   //unit tests
