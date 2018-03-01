@@ -43,8 +43,8 @@ android {
 }
 
 dependencies {
+  compile project(':expandablerecyclerview')
   compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'com.thoughtbot:expandablerecyclerview:1.3'
 
   //android
   compile 'com.android.support:appcompat-v7:26.1.0'

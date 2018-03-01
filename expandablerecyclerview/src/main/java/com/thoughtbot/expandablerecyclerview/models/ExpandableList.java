@@ -1,41 +1,88 @@
 package com.thoughtbot.expandablerecyclerview.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /*
  * Terminology:
  * <li> flat position - Flat list position, the position of an item relative to all the
- * other *visible* items on the screen. For example, if you have a three groups, each with
+ * other *visible* items on the screen. For example, if you have a three mGroupsList, each with
  * 2 children and all are collapsed, the "flat position" of the last group would be 2. And if
- * the first of those three groups was expanded, the flat position of the last group would now be 4.
+ * the first of those three mGroupsList was expanded, the flat position of the last group would now be 4.
  *
  *
- * This class acts as a translator between the flat list position - i.e. what groups
- * and children you see on the screen - to and from the full backing list of groups & their children
+ * This class acts as a translator between the flat list position - i.e. what mGroupsList
+ * and children you see on the screen - to and from the full backing list of mGroupsList & their children
  */
 public class ExpandableList {
 
-  public List<? extends ExpandableGroup> groups;
-  public boolean[] expandedGroupIndexes;
+  private List<ExpandableGroup> mGroupsList;
+  private List<Boolean> mExpandedGroupIndexesList;
 
   public ExpandableList(List<? extends ExpandableGroup> groups) {
-    this.groups = groups;
-
-    expandedGroupIndexes = new boolean[groups.size()];
-    for (int i = 0; i < groups.size(); i++) {
-      expandedGroupIndexes[i] = false;
+    mExpandedGroupIndexesList = new ArrayList<>();
+    mGroupsList = new ArrayList<>();
+    if(groups!=null){
+      addGroups(groups);
     }
+
   }
 
+  public ExpandableList() {
+    this(null);
+  }
+
+  public void addGroup(ExpandableGroup group){
+    mGroupsList.add(group);
+    mExpandedGroupIndexesList.add(false);
+  }
+
+  public void addGroups(List<? extends ExpandableGroup> groups){
+    mGroupsList.addAll(groups);
+    mExpandedGroupIndexesList.addAll(Collections.nCopies(groups.size(),false));
+  }
+
+  public void setGroups(List<? extends ExpandableGroup> groups){
+    mGroupsList.clear();
+    mExpandedGroupIndexesList.clear();
+    setGroups(groups);
+  }
+
+  public List<ExpandableGroup> getGroups() {
+    return mGroupsList;
+  }
+
+  public Boolean[] getExpandedGroupIndexesList() {
+    return mExpandedGroupIndexesList.toArray(new Boolean[0]);
+  }
+
+
+  public void restoreExpandedGroupIndexesState(Boolean[] expandedGroupIndexes){
+    mExpandedGroupIndexesList.clear();
+    mExpandedGroupIndexesList.addAll(Arrays.asList(expandedGroupIndexes));
+  }
+
+  public void expandGroup(int index){
+    mExpandedGroupIndexesList.set(index,true);
+  }
+  public void collapseGroup(int index){
+    mExpandedGroupIndexesList.set(index,false);
+  }
+
+  public boolean isGroupExpanded(int index){
+    return mExpandedGroupIndexesList.get(index);
+  }
   /**
-   * @param group the index of the {@link ExpandableGroup} in the full collection {@link #groups}
+   * @param group the index of the {@link ExpandableGroup} in the full collection {@link #mGroupsList}
    * @return the number of visible row items for the particular group. If the group is collapsed,
    * return 1 for the group header. If the group is expanded return total number of children in the
    * group + 1 for the group header
    */
   private int numberOfVisibleItemsInGroup(int group) {
-    if (expandedGroupIndexes[group]) {
-      return groups.get(group).getItemCount() + 1;
+    if (mExpandedGroupIndexesList.get(group)) {
+      return mGroupsList.get(group).getItemCount() + 1;
     } else {
       return 1;
     }
@@ -46,7 +93,7 @@ public class ExpandableList {
    */
   public int getVisibleItemCount() {
     int count = 0;
-    for (int i = 0; i < groups.size(); i++) {
+    for (int i = 0; i < mGroupsList.size(); i++) {
       count += numberOfVisibleItemsInGroup(i);
     }
     return count;
@@ -56,8 +103,8 @@ public class ExpandableList {
    * Translates a flat list position (the raw position of an item (child or group) in the list) to
    * either a) group pos if the specified flat list position corresponds to a group, or b) child
    * pos if it corresponds to a child.  Performs a binary search on the expanded
-   * groups list to find the flat list pos if it is an exp group, otherwise
-   * finds where the flat list pos fits in between the exp groups.
+   * mGroupsList list to find the flat list pos if it is an exp group, otherwise
+   * finds where the flat list pos fits in between the exp mGroupsList.
    *
    * @param flPos the flat list position to be translated
    * @return the group position or child position of the specified flat list
@@ -67,7 +114,7 @@ public class ExpandableList {
   public ExpandableListPosition getUnflattenedPosition(int flPos) {
     int groupItemCount;
     int adapted = flPos;
-    for (int i = 0; i < groups.size(); i++) {
+    for (int i = 0; i < mGroupsList.size(); i++) {
       groupItemCount = numberOfVisibleItemsInGroup(i);
       if (adapted == 0) {
         return ExpandableListPosition.obtain(ExpandableListPosition.GROUP, i, -1, flPos);
@@ -94,7 +141,7 @@ public class ExpandableList {
   }
 
   /**
-   * @param groupIndex representing the index of a group within {@link #groups}
+   * @param groupIndex representing the index of a group within {@link #mGroupsList}
    * @return the index of a group within the {@link #getVisibleItemCount()}
    */
   public int getFlattenedGroupIndex(int groupIndex) {
@@ -107,12 +154,12 @@ public class ExpandableList {
   }
 
   /**
-   * @param group an {@link ExpandableGroup} within {@link #groups}
+   * @param group an {@link ExpandableGroup} within {@link #mGroupsList}
    * @return the index of a group within the {@link #getVisibleItemCount()} or 0 if the
-   * groups.indexOf cannot find the group
+   * mGroupsList.indexOf cannot find the group
    */
   public int getFlattenedGroupIndex(ExpandableGroup group) {
-    int groupIndex = groups.indexOf(group);
+    int groupIndex = mGroupsList.indexOf(group);
     int runningTotal = 0;
 
     for (int i = 0; i < groupIndex; i++) {
@@ -154,7 +201,7 @@ public class ExpandableList {
   /**
    * Converts the details of a child's position to a flat list position.
    *
-   * @param groupIndex The index of a group within {@link #groups}
+   * @param groupIndex The index of a group within {@link #mGroupsList}
    * @param childIndex the index of a child within it's {@link ExpandableGroup}
    * @return The flat list position for the given child
    */
@@ -168,7 +215,7 @@ public class ExpandableList {
   }
 
   /**
-   * @param groupIndex The index of a group within {@link #groups}
+   * @param groupIndex The index of a group within {@link #mGroupsList}
    * @return The flat list position for the first child in a group
    */
   public int getFlattenedFirstChildIndex(int groupIndex) {
@@ -189,7 +236,7 @@ public class ExpandableList {
    * @return the total number of children within the group associated with the @param listPosition
    */
   public int getExpandableGroupItemCount(ExpandableListPosition listPosition) {
-    return groups.get(listPosition.groupPos).getItemCount();
+    return mGroupsList.get(listPosition.groupPos).getItemCount();
   }
 
   /**
@@ -202,6 +249,9 @@ public class ExpandableList {
    * @return the {@link ExpandableGroup} object that contains the listPosition
    */
   public ExpandableGroup getExpandableGroup(ExpandableListPosition listPosition) {
-    return groups.get(listPosition.groupPos);
+    return mGroupsList.get(listPosition.groupPos);
   }
+
+
+
 }

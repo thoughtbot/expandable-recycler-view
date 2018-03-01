@@ -26,7 +26,33 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
   private OnGroupClickListener groupClickListener;
   private GroupExpandCollapseListener expandCollapseListener;
 
+  public ExpandableRecyclerViewAdapter() {
+    this(null);
+  }
+
   public ExpandableRecyclerViewAdapter(List<? extends ExpandableGroup> groups) {
+    setGroups(groups);
+  }
+
+  public void addGroup(ExpandableGroup group) {
+    if (group == null) {
+      throw new NullPointerException("The group is null!");
+    }
+    int startIndex = getItemCount();
+    expandableList.addGroup(group);
+    notifyItemInserted(startIndex);
+  }
+
+  public void addGroups(List<? extends ExpandableGroup> groups) {
+    if (groups == null) {
+      throw new NullPointerException("The groups list is null!");
+    }
+    int startIndex = getItemCount();
+    expandableList.addGroups(groups);
+    notifyItemRangeInserted(startIndex,groups.size());
+  }
+
+  public void setGroups(List<? extends ExpandableGroup> groups){
     this.expandableList = new ExpandableList(groups);
     this.expandCollapseController = new ExpandCollapseController(expandableList, this);
   }
@@ -215,7 +241,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * expanded state map
    */
   public void onSaveInstanceState(Bundle savedInstanceState) {
-    savedInstanceState.putBooleanArray(EXPAND_STATE_MAP, expandableList.expandedGroupIndexes);
+    savedInstanceState.putSerializable(EXPAND_STATE_MAP, expandableList.getExpandedGroupIndexesList());
   }
 
   /**
@@ -234,7 +260,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
     if (savedInstanceState == null || !savedInstanceState.containsKey(EXPAND_STATE_MAP)) {
       return;
     }
-    expandableList.expandedGroupIndexes = savedInstanceState.getBooleanArray(EXPAND_STATE_MAP);
+    expandableList.restoreExpandedGroupIndexesState((Boolean[]) savedInstanceState.getSerializable(EXPAND_STATE_MAP));
     notifyDataSetChanged();
   }
 
@@ -252,7 +278,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * @return the list of {@link ExpandableGroup} that this object was instantiated with
    */
   public List<? extends ExpandableGroup> getGroups() {
-    return expandableList.groups;
+    return expandableList.getGroups();
   }
 
   /**

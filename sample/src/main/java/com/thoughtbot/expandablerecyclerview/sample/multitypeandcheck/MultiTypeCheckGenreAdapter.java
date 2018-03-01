@@ -104,7 +104,7 @@ public class MultiTypeCheckGenreAdapter
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
-    outState.putParcelableArrayList(CHECKED_STATE_MAP, new ArrayList(expandableList.groups));
+    outState.putParcelableArrayList(CHECKED_STATE_MAP, new ArrayList(expandableList.getGroups()));
     super.onSaveInstanceState(outState);
   }
 
@@ -113,7 +113,7 @@ public class MultiTypeCheckGenreAdapter
     if (savedInstanceState == null || !savedInstanceState.containsKey(CHECKED_STATE_MAP)) {
       return;
     }
-    expandableList.groups = savedInstanceState.getParcelableArrayList(CHECKED_STATE_MAP);
+    expandableList.setGroups((List<? extends ExpandableGroup>)(Object) savedInstanceState.getParcelableArrayList(CHECKED_STATE_MAP));
     super.onRestoreInstanceState(savedInstanceState);
   }
 

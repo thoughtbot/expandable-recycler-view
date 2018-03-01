@@ -22,6 +22,10 @@
       android:parentActivityName=".MainActivity" />
 
     <activity
+        android:name=".addnewitems.AddNewItemsActivity"
+        android:parentActivityName=".MainActivity" />
+
+    <activity
       android:name=".multicheck.MultiCheckActivity"
       android:parentActivityName=".MainActivity" />
 

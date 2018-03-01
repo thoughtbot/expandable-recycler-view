@@ -2,6 +2,7 @@ package com.thoughtbot.expandablecheckrecyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.thoughtbot.expandablecheckrecyclerview.listeners.OnCheckChildClickListener;
@@ -78,7 +79,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
    */
   @Override
   public void onSaveInstanceState(Bundle outState) {
-    outState.putParcelableArrayList(CHECKED_STATE_MAP, new ArrayList(expandableList.groups));
+    outState.putParcelableArrayList(CHECKED_STATE_MAP, new ArrayList(expandableList.getGroups()));
     super.onSaveInstanceState(outState);
   }
 
@@ -99,7 +100,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
     if (savedInstanceState == null || !savedInstanceState.containsKey(CHECKED_STATE_MAP)) {
       return;
     }
-    expandableList.groups = savedInstanceState.getParcelableArrayList(CHECKED_STATE_MAP);
+    expandableList.setGroups((List<? extends ExpandableGroup>)(Object)savedInstanceState.getParcelableArrayList(CHECKED_STATE_MAP));
     super.onRestoreInstanceState(savedInstanceState);
   }
 
@@ -115,7 +116,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
     childCheckController.checkChild(checked, groupIndex, childIndex);
     if (childClickListener != null) {
       childClickListener.onCheckChildCLick(null, checked,
-          (CheckedExpandableGroup) expandableList.groups.get(groupIndex), childIndex);
+          (CheckedExpandableGroup) expandableList.getGroups().get(groupIndex), childIndex);
     }
   }
 
