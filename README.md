@@ -149,6 +149,54 @@ public class GenreActivity extends Activity {
 
 ```
 
+## Programmatic Expanding and Collapsing
+
+The `ExpandableRecyclerViewAdapter` exposes methods to control the expanded and
+collapsed state.
+
+First up we have the toggles, `.toggleGroup(int)` and
+`.toggleGroup(ExpandableGroup)`. These are handy for when you control the
+states explicitly.
+
+```java
+public class GenreActivity extends Activity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+
+    ...
+
+    Button showAllToggle = findViewById(R.id.show_all);
+    showAllToggle.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        for (int i = adapter.groups().size() - 1; i >= 0; i--) {
+          adapter.toggleGroup(i);
+        }
+      }
+    });
+
+  }
+}
+```
+
+We also expose explicit methods to control the expanding and collapsing of
+specific groups, `.expandGroup()` and `.collapseGroup()`. For example, to
+expand the first group immediately:
+
+```java
+public class GenreActivity extends Activity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+
+    ...
+
+    adapter.expandGroup(0);
+
+  }
+}
+```
+
 ## Adding Custom Expand / Collapse Animations
 
 If you want to add a custom `Drawable` that animates based on a groups state, override the `expand()` and `collapse()` methods in your `GroupViewHolder`:
