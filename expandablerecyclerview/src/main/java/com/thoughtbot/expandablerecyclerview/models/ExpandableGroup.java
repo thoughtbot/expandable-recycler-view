@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * The backing data object for an {@link Group}
  */
-public class Group<T extends Parcelable> implements Group<T> {
+public class ExpandableGroup<T extends Parcelable> implements Group<T> {
   private String title;
   private List<T> items;
 
-  public Group(String title, List<T> items) {
+  public ExpandableGroup(String title, List<T> items) {
     this.title = title;
     this.items = items;
   }
@@ -34,13 +34,13 @@ public class Group<T extends Parcelable> implements Group<T> {
 
   @Override
   public String toString() {
-    return "Group{" +
+    return "ExpandableGroup{" +
         "title='" + title + '\'' +
         ", items=" + items +
         '}';
   }
 
-  protected Group(Parcel in) {
+  protected ExpandableGroup(Parcel in) {
     title = in.readString();
     byte hasItems = in.readByte();
     int size = in.readInt();
@@ -74,16 +74,16 @@ public class Group<T extends Parcelable> implements Group<T> {
   }
 
   @SuppressWarnings("unused")
-  public static final Creator<Group> CREATOR =
-      new Creator<Group>() {
+  public static final Creator<ExpandableGroup> CREATOR =
+      new Creator<ExpandableGroup>() {
         @Override
-        public Group createFromParcel(Parcel in) {
-          return new Group(in);
+        public ExpandableGroup createFromParcel(Parcel in) {
+          return new ExpandableGroup(in);
         }
 
         @Override
-        public Group[] newArray(int size) {
-          return new Group[size];
+        public ExpandableGroup[] newArray(int size) {
+          return new ExpandableGroup[size];
         }
       };
 }
