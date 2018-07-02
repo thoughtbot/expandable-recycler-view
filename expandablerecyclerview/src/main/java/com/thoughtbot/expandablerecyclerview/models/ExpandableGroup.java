@@ -6,8 +6,11 @@ import java.util.List;
  * The backing data object for an {@link Group}
  */
 public class ExpandableGroup<T> implements Group<T> {
-  private String title;
-  private List<T> items;
+  protected String title;
+  protected List<T> items;
+
+  public ExpandableGroup() {
+  }
 
   public ExpandableGroup(String title, List<T> items) {
     this.title = title;

@@ -37,7 +37,7 @@ public class ChildCheckController {
     if (childrenUpdateListener != null) {
       childrenUpdateListener.updateChildrenCheckState(
           expandableList.getFlattenedFirstChildIndex(listPosition),
-          expandableList.getExpandableGroupItemCount(listPosition));
+          expandableList.getGroupItemCount(listPosition));
     }
   }
 

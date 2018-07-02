@@ -12,6 +12,7 @@ import com.thoughtbot.expandablecheckrecyclerview.viewholders.CheckableChildView
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
   }
 
   @Override
-  public void onBindChildViewHolder(CCVH holder, int flatPosition, ExpandableGroup group,
+  public void onBindChildViewHolder(CCVH holder, int flatPosition, Group group,
       int childIndex) {
     ExpandableListPosition listPosition = expandableList.getUnflattenedPosition(flatPosition);
     holder.onBindViewHolder(flatPosition, childCheckController.isChildChecked(listPosition));
@@ -51,7 +52,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
     childCheckController.onChildCheckChanged(checked, listPos);
     if (childClickListener != null) {
       childClickListener.onCheckChildCLick(view, checked,
-          (CheckedExpandableGroup) expandableList.getExpandableGroup(listPos), listPos.childPos);
+          (CheckedExpandableGroup) expandableList.getGroup(listPos), listPos.childPos);
     }
   }
 
@@ -127,7 +128,7 @@ public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHol
 
     //only update the child views that are visible (i.e. their group is expanded)
     for (int i = 0; i < getGroups().size(); i++) {
-      ExpandableGroup group = getGroups().get(i);
+      Group group = getGroups().get(i);
       if (isGroupExpanded(group)) {
         notifyItemRangeChanged(expandableList.getFlattenedFirstChildIndex(i), group.getItemCount());
       }
