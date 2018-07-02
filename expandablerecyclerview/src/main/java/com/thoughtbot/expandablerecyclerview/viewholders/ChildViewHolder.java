@@ -2,10 +2,10 @@ package com.thoughtbot.expandablerecyclerview.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 
 /**
- * ViewHolder for {@link ExpandableGroup#items}
+ * ViewHolder for {@link Group#getItems()}
  */
 public class ChildViewHolder extends RecyclerView.ViewHolder {
 

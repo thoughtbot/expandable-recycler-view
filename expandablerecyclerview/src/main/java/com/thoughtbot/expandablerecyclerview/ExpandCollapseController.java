@@ -1,14 +1,15 @@
 package com.thoughtbot.expandablerecyclerview;
 
 import com.thoughtbot.expandablerecyclerview.listeners.ExpandCollapseListener;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableList;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 
 /**
  * This class is the sits between the backing {@link ExpandableList} and the {@link
  * ExpandableRecyclerViewAdapter} and mediates the expanding and collapsing of {@link
- * ExpandableGroup}
+ * Group}
  */
 public class ExpandCollapseController {
 
@@ -47,10 +48,10 @@ public class ExpandCollapseController {
   }
 
   /**
-   * @param group the {@link ExpandableGroup} being checked for its collapsed state
+   * @param group the {@link Group} being checked for its collapsed state
    * @return true if {@code group} is expanded, false if it is collapsed
    */
-  public boolean isGroupExpanded(ExpandableGroup group) {
+  public boolean isGroupExpanded(Group group) {
     int groupIndex = expandableList.groups.indexOf(group);
     return expandableList.expandedGroupIndexes[groupIndex];
   }
@@ -79,7 +80,7 @@ public class ExpandCollapseController {
     return expanded;
   }
 
-  public boolean toggleGroup(ExpandableGroup group) {
+  public boolean toggleGroup(Group group) {
     ExpandableListPosition listPos =
         expandableList.getUnflattenedPosition(expandableList.getFlattenedGroupIndex(group));
     boolean expanded = expandableList.expandedGroupIndexes[listPos.groupPos];

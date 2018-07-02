@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class ExpandableList {
 
-  public List<? extends ExpandableGroup> groups;
+  public List<? extends Group> groups;
   public boolean[] expandedGroupIndexes;
 
-  public ExpandableList(List<? extends ExpandableGroup> groups) {
+  public ExpandableList(List<? extends Group> groups) {
     this.groups = groups;
 
     expandedGroupIndexes = new boolean[groups.size()];
@@ -28,7 +28,7 @@ public class ExpandableList {
   }
 
   /**
-   * @param group the index of the {@link ExpandableGroup} in the full collection {@link #groups}
+   * @param group the index of the {@link Group} in the full collection {@link #groups}
    * @return the number of visible row items for the particular group. If the group is collapsed,
    * return 1 for the group header. If the group is expanded return total number of children in the
    * group + 1 for the group header
@@ -107,11 +107,11 @@ public class ExpandableList {
   }
 
   /**
-   * @param group an {@link ExpandableGroup} within {@link #groups}
+   * @param group an {@link Group} within {@link #groups}
    * @return the index of a group within the {@link #getVisibleItemCount()} or 0 if the
    * groups.indexOf cannot find the group
    */
-  public int getFlattenedGroupIndex(ExpandableGroup group) {
+  public int getFlattenedGroupIndex(Group group) {
     int groupIndex = groups.indexOf(group);
     int runningTotal = 0;
 
@@ -155,7 +155,7 @@ public class ExpandableList {
    * Converts the details of a child's position to a flat list position.
    *
    * @param groupIndex The index of a group within {@link #groups}
-   * @param childIndex the index of a child within it's {@link ExpandableGroup}
+   * @param childIndex the index of a child within it's {@link Group}
    * @return The flat list position for the given child
    */
   public int getFlattenedChildIndex(int groupIndex, int childIndex) {
@@ -188,20 +188,20 @@ public class ExpandableList {
    * @param listPosition An {@link ExpandableListPosition} representing either a child or group
    * @return the total number of children within the group associated with the @param listPosition
    */
-  public int getExpandableGroupItemCount(ExpandableListPosition listPosition) {
+  public int getGroupItemCount(ExpandableListPosition listPosition) {
     return groups.get(listPosition.groupPos).getItemCount();
   }
 
   /**
-   * Translates either a group pos or a child pos to an {@link ExpandableGroup}.
+   * Translates either a group pos or a child pos to an {@link Group}.
    * If the {@link ExpandableListPosition} is a child position, it returns the {@link
-   * ExpandableGroup} it belongs to
+   * Group} it belongs to
    *
    * @param listPosition a {@link ExpandableListPosition} representing either a group position
    * or child position
-   * @return the {@link ExpandableGroup} object that contains the listPosition
+   * @return the {@link Group} object that contains the listPosition
    */
-  public ExpandableGroup getExpandableGroup(ExpandableListPosition listPosition) {
+  public Group getGroup(ExpandableListPosition listPosition) {
     return groups.get(listPosition.groupPos);
   }
 }

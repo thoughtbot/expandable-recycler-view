@@ -30,6 +30,14 @@ public class Genre extends ExpandableGroup<Artist> {
 }
 ```
 
+or implement `Group` interface if you want to use expandable group over your own model:
+
+``` java
+public class YourOwnAwesomeModel implements Group<Artist> {
+  ...
+}
+```
+
 Next up, let's create the `ChildViewHolder` and `GroupViewHolder`. These are both wrappers around regular ol' `RecyclerView.ViewHolder`s so implement any view inflation and binding methods you may need.
 
 ``` java

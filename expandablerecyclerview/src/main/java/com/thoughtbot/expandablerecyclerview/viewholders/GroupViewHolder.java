@@ -4,10 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.thoughtbot.expandablerecyclerview.listeners.OnGroupClickListener;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 
 /**
- * ViewHolder for the {@link ExpandableGroup#title} in a {@link ExpandableGroup}
+ * ViewHolder for the {@link Group#getTitle()} in a {@link Group}
  *
  * The current implementation does now allow for sub {@link View} of the parent view to trigger
  * a collapse / expand. *Only* click events on the parent {@link View} will trigger a collapse or

@@ -6,38 +6,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The backing data object for an {@link ExpandableGroup}
+ * The backing data object for an {@link Group}
  */
-public class ExpandableGroup<T extends Parcelable> implements Parcelable {
+public class Group<T extends Parcelable> implements Group<T> {
   private String title;
   private List<T> items;
 
-  public ExpandableGroup(String title, List<T> items) {
+  public Group(String title, List<T> items) {
     this.title = title;
     this.items = items;
   }
 
+  @Override
   public String getTitle() {
     return title;
   }
 
+  @Override
   public List<T> getItems() {
     return items;
   }
 
+  @Override
   public int getItemCount() {
     return items == null ? 0 : items.size();
   }
 
   @Override
   public String toString() {
-    return "ExpandableGroup{" +
+    return "Group{" +
         "title='" + title + '\'' +
         ", items=" + items +
         '}';
   }
 
-  protected ExpandableGroup(Parcel in) {
+  protected Group(Parcel in) {
     title = in.readString();
     byte hasItems = in.readByte();
     int size = in.readInt();
@@ -71,16 +74,16 @@ public class ExpandableGroup<T extends Parcelable> implements Parcelable {
   }
 
   @SuppressWarnings("unused")
-  public static final Creator<ExpandableGroup> CREATOR =
-      new Creator<ExpandableGroup>() {
+  public static final Creator<Group> CREATOR =
+      new Creator<Group>() {
         @Override
-        public ExpandableGroup createFromParcel(Parcel in) {
-          return new ExpandableGroup(in);
+        public Group createFromParcel(Parcel in) {
+          return new Group(in);
         }
 
         @Override
-        public ExpandableGroup[] newArray(int size) {
-          return new ExpandableGroup[size];
+        public Group[] newArray(int size) {
+          return new Group[size];
         }
       };
 }

@@ -2,7 +2,7 @@ package com.thoughtbot.expandablerecyclerview;
 
 import android.app.Application;
 import android.content.Context;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableList;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.testUtils.TestDataFactory;
@@ -26,7 +26,7 @@ import static junit.framework.Assert.assertNotNull;
 public class ExpandableListTest {
 
   private Context context;
-  private List<ExpandableGroup> groups;
+  private List<Group> groups;
 
   @Before
   public void setUp() throws Exception {
