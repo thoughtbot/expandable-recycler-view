@@ -3,12 +3,14 @@ package com.thoughtbot.expandablerecyclerview.sample.singlecheck;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.thoughtbot.expandablecheckrecyclerview.CheckableChildRecyclerViewAdapter;
 import com.thoughtbot.expandablecheckrecyclerview.models.CheckedExpandableGroup;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
+
 import java.util.List;
 
 public class SingleCheckGenreAdapter extends
@@ -41,7 +43,7 @@ public class SingleCheckGenreAdapter extends
 
   @Override
   public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
+      Group group) {
     holder.setGenreTitle(group);
   }
 }

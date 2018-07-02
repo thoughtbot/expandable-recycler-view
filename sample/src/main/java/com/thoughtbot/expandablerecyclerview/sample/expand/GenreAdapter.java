@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
@@ -32,7 +33,7 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
 
   @Override
   public void onBindChildViewHolder(ArtistViewHolder holder, int flatPosition,
-      ExpandableGroup group, int childIndex) {
+                                    Group group, int childIndex) {
 
     final Artist artist = ((Genre) group).getItems().get(childIndex);
     holder.setArtistName(artist.getName());
@@ -40,7 +41,7 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
 
   @Override
   public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
+      Group group) {
 
     holder.setGenreTitle(group);
   }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.thoughtbot.expandablecheckrecyclerview.ChildCheckController;
 import com.thoughtbot.expandablecheckrecyclerview.listeners.OnCheckChildClickListener;
 import com.thoughtbot.expandablecheckrecyclerview.listeners.OnChildCheckChangedListener;
@@ -12,12 +13,14 @@ import com.thoughtbot.expandablecheckrecyclerview.models.CheckedExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.MultiTypeExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckArtistViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +68,7 @@ public class MultiTypeCheckGenreAdapter
   }
 
   @Override
-  public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, ExpandableGroup group,
+  public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, Group group,
       int childIndex) {
     int viewType = getItemViewType(flatPosition);
     Artist artist = (Artist) group.getItems().get(childIndex);
@@ -83,7 +86,7 @@ public class MultiTypeCheckGenreAdapter
 
   @Override
   public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
+      Group group) {
     holder.setGenreTitle(group);
   }
 
@@ -93,7 +96,7 @@ public class MultiTypeCheckGenreAdapter
     childCheckController.onChildCheckChanged(checked, listPos);
     if (childClickListener != null) {
       childClickListener.onCheckChildCLick(view, checked,
-          (CheckedExpandableGroup) expandableList.getExpandableGroup(listPos), listPos.childPos);
+          (CheckedExpandableGroup) expandableList.getGroup(listPos), listPos.childPos);
     }
   }
 
@@ -122,7 +125,7 @@ public class MultiTypeCheckGenreAdapter
 
     //only update the child views that are visible (i.e. their group is expanded)
     for (int i = 0; i < getGroups().size(); i++) {
-      ExpandableGroup group = getGroups().get(i);
+      Group group = getGroups().get(i);
       if (isGroupExpanded(group)) {
         notifyItemRangeChanged(expandableList.getFlattenedFirstChildIndex(i), group.getItemCount());
       }
@@ -135,7 +138,7 @@ public class MultiTypeCheckGenreAdapter
   }
 
   @Override
-  public int getChildViewType(int position, ExpandableGroup group, int childIndex) {
+  public int getChildViewType(int position, Group group, int childIndex) {
     if (((Artist) (group).getItems().get(childIndex)).isFavorite()) {
       return FAVORITE_VIEW_TYPE;
     } else {

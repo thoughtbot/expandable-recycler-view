@@ -2,15 +2,17 @@ package com.thoughtbot.expandablerecyclerview.sample.multitype;
 
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.thoughtbot.expandablerecyclerview.MultiTypeExpandableRecyclerViewAdapter;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
+
 import java.util.List;
 
 import static android.view.LayoutInflater.from;
@@ -48,7 +50,7 @@ public class MultiTypeGenreAdapter
   }
 
   @Override
-  public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, ExpandableGroup group,
+  public void onBindChildViewHolder(ChildViewHolder holder, int flatPosition, Group group,
       int childIndex) {
     int viewType = getItemViewType(flatPosition);
     Artist artist = ((Genre) group).getItems().get(childIndex);
@@ -63,12 +65,12 @@ public class MultiTypeGenreAdapter
 
   @Override
   public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
+      Group group) {
     holder.setGenreTitle(group);
   }
 
   @Override
-  public int getChildViewType(int position, ExpandableGroup group, int childIndex) {
+  public int getChildViewType(int position, Group group, int childIndex) {
     if (((Genre) group).getItems().get(childIndex).isFavorite()) {
       return FAVORITE_VIEW_TYPE;
     } else {

@@ -5,6 +5,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.thoughtbot.expandablerecyclerview.models.Group;
 import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 import com.thoughtbot.expandablerecyclerview.sample.multicheck.MultiCheckGenre;
@@ -26,7 +27,7 @@ public class GenreViewHolder extends GroupViewHolder {
     icon = (ImageView) itemView.findViewById(R.id.list_item_genre_icon);
   }
 
-  public void setGenreTitle(ExpandableGroup genre) {
+  public void setGenreTitle(Group genre) {
     if (genre instanceof Genre) {
       genreName.setText(genre.getTitle());
       icon.setBackgroundResource(((Genre) genre).getIconResId());
