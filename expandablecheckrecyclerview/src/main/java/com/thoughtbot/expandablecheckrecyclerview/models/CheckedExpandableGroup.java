@@ -1,6 +1,8 @@
 package com.thoughtbot.expandablecheckrecyclerview.models;
 
 import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * An extension of ExpandableGroup that holds onto the checked state of it's children
  */
-public abstract class CheckedExpandableGroup extends ExpandableGroup {
+public abstract class CheckedExpandableGroup extends ExpandableGroup implements Parcelable {
 
   public boolean[] selectedChildren;
 

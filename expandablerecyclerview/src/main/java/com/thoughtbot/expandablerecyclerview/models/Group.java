@@ -1,13 +1,11 @@
 package com.thoughtbot.expandablerecyclerview.models;
 
-import android.os.Parcelable;
-
 import java.util.List;
 
 /**
  * The backing interface for data object.
  */
-public interface Group<T extends Parcelable> extends Parcelable {
+public interface Group<T> {
 
   String getTitle();
 

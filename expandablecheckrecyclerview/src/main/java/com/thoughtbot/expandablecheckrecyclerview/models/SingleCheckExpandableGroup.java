@@ -1,13 +1,15 @@
 package com.thoughtbot.expandablecheckrecyclerview.models;
 
 import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * A subclass of {@link CheckedExpandableGroup} that allows for only *one* child to be checked at
  * one time
  */
-public class SingleCheckExpandableGroup extends CheckedExpandableGroup {
+public class SingleCheckExpandableGroup extends CheckedExpandableGroup implements Parcelable {
 
   public SingleCheckExpandableGroup(String title, List items) {
     super(title, items);
