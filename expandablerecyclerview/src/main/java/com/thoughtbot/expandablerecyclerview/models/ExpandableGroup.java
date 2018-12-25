@@ -64,10 +64,8 @@ public class ExpandableGroup<T extends Parcelable> implements Parcelable {
     } else {
       dest.writeByte((byte) (0x01));
       dest.writeInt(items.size());
-      if (items.size() > 0) {
-          final Class<?> objectsType = items.get(0).getClass();
-          dest.writeSerializable(objectsType);
-      }
+      final Class<?> objectsType = items.get(0).getClass();
+      dest.writeSerializable(objectsType);
       dest.writeList(items);
     }
   }
