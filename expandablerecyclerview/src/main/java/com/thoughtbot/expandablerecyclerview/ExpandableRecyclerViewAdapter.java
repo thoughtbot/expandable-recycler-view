@@ -2,8 +2,8 @@ package com.thoughtbot.expandablerecyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.view.ViewGroup;
 import com.thoughtbot.expandablerecyclerview.listeners.ExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.listeners.GroupExpandCollapseListener;
