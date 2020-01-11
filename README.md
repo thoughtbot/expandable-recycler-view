@@ -1,3 +1,6 @@
+# Fork of https://github.com/thoughtbot/expandable-recycler-view 
+# Androidx support
+
 ![logo](https://images.thoughtbot.com/blog-vellum-image-uploads/lpMtQDMlRindAIJOHlGl_expandable-recycler-view-logo.png)
 
 # Expandable RecyclerView [![CircleCI](https://circleci.com/gh/thoughtbot/expandable-recycler-view/tree/master.svg?style=svg)](https://circleci.com/gh/thoughtbot/expandable-recycler-view/tree/master)
@@ -6,14 +9,23 @@ Custom RecyclerViewAdapters for expanding and collapsing groups with support for
 <img src="https://cloud.githubusercontent.com/assets/5386934/17074123/b9d1efca-502c-11e6-9c9f-fb6180ee337f.gif" width=300 />
 
 ## Download
+```groovy
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
 ExpandableRecyclerView:
 ```groovy
-compile 'com.thoughtbot:expandablerecyclerview:1.3'
+implementation 'com.github.tank777.expandable-recycler-view:expandablecheckrecyclerview:1.6@aar'
 ```
 
 ExpandableCheckRecyclerView:
 ```groovy
-compile 'com.thoughtbot:expandablecheckrecyclerview:1.4'
+implementation 'com.github.tank777.expandable-recycler-view:expandablerecyclerview:1.6@aar'
 ```
 
 ## Usage
@@ -366,18 +378,10 @@ See the [CONTRIBUTING] document. Thank you, [contributors]!
 
 Expandable RecyclerView is Copyright (c) 2016 thoughtbot, inc. It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
 
-## About
+## Thank you
 
-Expandable RecyclerView is maintained by [@mandybess](https://github.com/mandybess)
+Expandable RecyclerView was maintained by [@mandybess](https://github.com/mandybess)
 
 ![thoughtbot](https://thoughtbot.com/logo.png)
 
-Expandable RecyclerView is maintained and funded by thoughtbot, inc. The names and logos for thoughtbot are trademarks of thoughtbot, inc.
-
-We love open source software! See [our other projects][tools] or [hire us][hire] to help build your product.
-
-  [tools]: https://thoughtbot.com/tools?utm_source=github
-  [hire]: https://thoughtbot.com/hire-us?utm_source=github
-  [LICENSE]: /LICENSE
-  [CONTRIBUTING]: CONTRIBUTING.md
-  [contributors]: https://github.com/thoughtbot/expandable-recycler-view/graphs/contributors
+Expandable RecyclerView was maintained and funded by thoughtbot, inc. The names and logos for thoughtbot are trademarks of thoughtbot, inc.
