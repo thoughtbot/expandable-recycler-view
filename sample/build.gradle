@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 29
+  buildToolsVersion "29.0.3"
 
   defaultConfig {
     applicationId "com.thoughtbot.expandablerecyclerview.sample"
     minSdkVersion 16
-    targetSdkVersion 23
+    targetSdkVersion 29
     versionCode 1
     versionName "1.0"
 
