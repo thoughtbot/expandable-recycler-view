@@ -2,7 +2,7 @@ package com.thoughtbot.expandablerecyclerview.sample;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.widget.LinearLayout;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
