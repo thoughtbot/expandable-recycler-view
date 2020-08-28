@@ -91,4 +91,8 @@ public class ExpandCollapseController {
     return expanded;
   }
 
+  public void refreshData(ExpandableList expandableList){
+    this.expandableList = expandableList;
+  }
+
 }
