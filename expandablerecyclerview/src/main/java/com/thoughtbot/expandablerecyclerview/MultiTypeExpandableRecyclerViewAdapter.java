@@ -44,10 +44,8 @@ public abstract class MultiTypeExpandableRecyclerViewAdapter<GVH extends GroupVi
   /**
    * Implementation of Adapter.onBindViewHolder(RecyclerView.ViewHolder, int)
    * that determines if the list item is a group or a child and calls through
-   * to the appropriate implementation of either {@link #onBindGroupViewHolder(GroupViewHolder,
-   * int,
-   * ExpandableGroup)}
-   * or {@link #onBindChildViewHolder(ChildViewHolder, int, ExpandableGroup, int)}.
+   * to the appropriate implementation of either {@link ExpandableRecyclerViewAdapter#onBindGroupViewHolder(GroupViewHolder, int, ExpandableGroup, int)}
+   * or {@link ExpandableRecyclerViewAdapter#onBindChildViewHolder(ChildViewHolder, int, ExpandableGroup, int, int)}.
    *
    * @param holder Either the GroupViewHolder or the ChildViewHolder to bind data to
    * @param position The flat position (or index in the list of {@link
@@ -58,7 +56,7 @@ public abstract class MultiTypeExpandableRecyclerViewAdapter<GVH extends GroupVi
     ExpandableListPosition listPos = expandableList.getUnflattenedPosition(position);
     ExpandableGroup group = expandableList.getExpandableGroup(listPos);
     if (isGroup(getItemViewType(position))) {
-      onBindGroupViewHolder((GVH) holder, position, group);
+      onBindGroupViewHolder((GVH) holder, position, group, listPos.groupPos);
 
       if (isGroupExpanded(group)) {
         ((GVH) holder).expand();
@@ -66,7 +64,7 @@ public abstract class MultiTypeExpandableRecyclerViewAdapter<GVH extends GroupVi
         ((GVH) holder).collapse();
       }
     } else if (isChild(getItemViewType(position))) {
-      onBindChildViewHolder((CVH) holder, position, group, listPos.childPos);
+      onBindChildViewHolder((CVH) holder, position, group, listPos.groupPos, listPos.childPos);
     }
   }
 
