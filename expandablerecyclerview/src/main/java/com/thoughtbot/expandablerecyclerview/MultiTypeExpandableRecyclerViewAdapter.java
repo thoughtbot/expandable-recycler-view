@@ -116,7 +116,7 @@ public abstract class MultiTypeExpandableRecyclerViewAdapter<GVH extends GroupVi
   }
 
   /**
-   * Used to allow subclasses to have multiple view types for groups
+   * Used to allow subclasses to have multiple view types for mGroups
    *
    * @param position the flat position in the list
    * @param group the group at this position

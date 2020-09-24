@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 26
+  buildToolsVersion '26.0.2'
 
   defaultConfig {
     applicationId "com.thoughtbot.expandablerecyclerview.sample"
     minSdkVersion 16
-    targetSdkVersion 23
+    targetSdkVersion 26
     versionCode 1
     versionName "1.0"
 
@@ -24,20 +24,21 @@ android {
 dependencies {
   compile project(':expandablecheckrecyclerview')
 
-  //android
-  compile 'com.android.support:appcompat-v7:23.4.0'
-  compile 'com.android.support:recyclerview-v7:23.4.0'
+  compile fileTree(dir: 'libs', include: ['*.jar'])
 
-  //unit tests
+  compile 'com.android.support:appcompat-v7:26.1.0'
+  compile 'com.android.support:recyclerview-v7:26.1.0'
+
+
   testCompile 'junit:junit:4.12'
   testCompile 'org.robolectric:robolectric:3.2.1'
   testCompile 'org.mockito:mockito-core:1.10.5'
 
   //automation tests
-  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-  androidTestCompile 'com.android.support.test:runner:0.5'
-  androidTestCompile 'com.android.support:support-annotations:23.4.0'
-  androidTestCompile 'com.android.support.test:rules:0.4.1'
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+  androidTestCompile 'com.android.support.test:runner:1.0.1'
+  androidTestCompile 'com.android.support:support-annotations:26.1.0'
+  androidTestCompile 'com.android.support.test:rules:1.0.1'
   androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
     // Necessary to avoid version conflicts
     exclude group: 'com.android.support', module: 'appcompat'

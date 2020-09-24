@@ -32,7 +32,7 @@ public class ChildCheckController {
    */
   public void onChildCheckChanged(boolean checked, ExpandableListPosition listPosition) {
     CheckedExpandableGroup group =
-        (CheckedExpandableGroup) expandableList.groups.get(listPosition.groupPos);
+        (CheckedExpandableGroup) expandableList.getGroups().get(listPosition.groupPos);
     group.onChildClicked(listPosition.childPos, checked);
     if (childrenUpdateListener != null) {
       childrenUpdateListener.updateChildrenCheckState(
@@ -42,11 +42,11 @@ public class ChildCheckController {
   }
 
   public void checkChild(boolean checked, int groupIndex, int childIndex) {
-    CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.groups.get(groupIndex);
+    CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.getGroups().get(groupIndex);
     group.onChildClicked(childIndex, checked);
     if (childrenUpdateListener != null) {
       //only update children check states if group is expanded
-      boolean isGroupExpanded = expandableList.expandedGroupIndexes[groupIndex];
+      boolean isGroupExpanded = expandableList.isGroupExpanded(groupIndex);
       if (isGroupExpanded) {
         childrenUpdateListener.updateChildrenCheckState(
             expandableList.getFlattenedFirstChildIndex(groupIndex), group.getItemCount());
@@ -60,7 +60,7 @@ public class ChildCheckController {
    */
   public boolean isChildChecked(ExpandableListPosition listPosition) {
     CheckedExpandableGroup group =
-        (CheckedExpandableGroup) expandableList.groups.get(listPosition.groupPos);
+        (CheckedExpandableGroup) expandableList.getGroups().get(listPosition.groupPos);
     return group.isChildChecked(listPosition.childPos);
   }
 
@@ -69,9 +69,9 @@ public class ChildCheckController {
    */
   public List<Integer> getCheckedPositions() {
     List<Integer> selected = new ArrayList<>();
-    for (int i = 0; i < expandableList.groups.size(); i++) {
-      if (expandableList.groups.get(i) instanceof CheckedExpandableGroup) {
-        CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.groups.get(i);
+    for (int i = 0; i < expandableList.getGroups().size(); i++) {
+      if (expandableList.getGroups().get(i) instanceof CheckedExpandableGroup) {
+        CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.getGroups().get(i);
         for (int j = 0; j < group.getItemCount(); j++) {
           if (group.isChildChecked(j)) {
             long packedPosition = ExpandableListView.getPackedPositionForChild(i, j);
@@ -95,8 +95,8 @@ public class ChildCheckController {
    * Clear any choices previously checked
    */
   public void clearCheckStates() {
-    for (int i = 0; i < expandableList.groups.size(); i++) {
-      CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.groups.get(i);
+    for (int i = 0; i < expandableList.getGroups().size(); i++) {
+      CheckedExpandableGroup group = (CheckedExpandableGroup) expandableList.getGroups().get(i);
       group.clearSelections();
     }
   }

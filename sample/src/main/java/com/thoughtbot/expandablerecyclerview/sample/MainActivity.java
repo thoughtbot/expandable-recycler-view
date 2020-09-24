@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.thoughtbot.expandablerecyclerview.sample.addnewitems.AddNewItemsActivity;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ExpandActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multicheck.MultiCheckActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multitype.MultiTypeActivity;
@@ -33,6 +35,9 @@ public class MainActivity extends Activity {
 
     Button mixedTypeAndCheck = (Button) findViewById(R.id.mixedtype_check_button);
     mixedTypeAndCheck.setOnClickListener(navigateTo(MultiTypeCheckGenreActivity.class));
+
+    Button addNewItems = (Button) findViewById(R.id.add_items_button);
+    addNewItems.setOnClickListener(navigateTo(AddNewItemsActivity.class));
   }
 
   public OnClickListener navigateTo(final Class<?> clazz) {

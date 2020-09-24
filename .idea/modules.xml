@@ -3,9 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/expandable-recycler-view.iml" filepath="$PROJECT_DIR$/expandable-recycler-view.iml" />
+      <module fileurl="file://C:\ExpandableRecycler\expandable-recycler-view\expandable-recycler-view.iml" filepath="C:\ExpandableRecycler\expandable-recycler-view\expandable-recycler-view.iml" />
       <module fileurl="file://$PROJECT_DIR$/expandablecheckrecyclerview/expandablecheckrecyclerview.iml" filepath="$PROJECT_DIR$/expandablecheckrecyclerview/expandablecheckrecyclerview.iml" />
+      <module fileurl="file://C:\ExpandableRecycler\expandable-recycler-view\expandablecheckrecyclerview\expandablecheckrecyclerview.iml" filepath="C:\ExpandableRecycler\expandable-recycler-view\expandablecheckrecyclerview\expandablecheckrecyclerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/expandablerecyclerview/expandablerecyclerview.iml" filepath="$PROJECT_DIR$/expandablerecyclerview/expandablerecyclerview.iml" />
+      <module fileurl="file://C:\ExpandableRecycler\expandable-recycler-view\expandablerecyclerview\expandablerecyclerview.iml" filepath="C:\ExpandableRecycler\expandable-recycler-view\expandablerecyclerview\expandablerecyclerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://C:\ExpandableRecycler\expandable-recycler-view\sample\sample.iml" filepath="C:\ExpandableRecycler\expandable-recycler-view\sample\sample.iml" />
     </modules>
   </component>
 </project>
