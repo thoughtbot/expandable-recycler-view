@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * The backing data object for an {@link ExpandableGroup}
  */
-public class ExpandableGroup<T extends Parcelable> implements Parcelable {
+public class ExpandableGroup<T> implements Parcelable {
   private String title;
   private List<T> items;
 
