@@ -1,10 +1,11 @@
 package com.thoughtbot.expandablerecyclerview;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.view.ViewGroup;
+
 import com.thoughtbot.expandablerecyclerview.listeners.ExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.listeners.GroupExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.listeners.OnGroupClickListener;
@@ -13,6 +14,7 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableList;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
+
 import java.util.List;
 
 public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder, CVH extends ChildViewHolder>
@@ -223,7 +225,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
   /**
    * Stores the expanded state map across state loss.
    * <p>
-   * Should be called from whatever {@link Activity} that hosts the RecyclerView that {@link
+   * Should be called from whatever {@link AppCompatActivity} that hosts the RecyclerView that {@link
    * ExpandableRecyclerViewAdapter} is attached to.
    * <p>
    * This will make sure to add the expanded state map as an extra to the
@@ -240,8 +242,8 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * Fetches the expandable state map from the saved instance state {@link Bundle}
    * and restores the expanded states of all of the list items.
    * <p>
-   * Should be called from {@link Activity#onRestoreInstanceState(Bundle)}  in
-   * the {@link Activity} that hosts the RecyclerView that this
+   * Should be called from {@link AppCompatActivity#onRestoreInstanceState(Bundle)}  in
+   * the {@link AppCompatActivity} that hosts the RecyclerView that this
    * {@link ExpandableRecyclerViewAdapter} is attached to.
    * <p>
    *
