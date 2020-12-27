@@ -1,17 +1,18 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 30
+  buildToolsVersion "30.0.3"
 
   defaultConfig {
     applicationId "com.thoughtbot.expandablerecyclerview.sample"
     minSdkVersion 16
-    targetSdkVersion 23
+    targetSdkVersion 30
     versionCode 1
     versionName "1.0"
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
   }
   buildTypes {
     release {
@@ -25,8 +26,8 @@ dependencies {
   compile project(':expandablecheckrecyclerview')
 
   //android
-  compile 'com.android.support:appcompat-v7:23.4.0'
-  compile 'com.android.support:recyclerview-v7:23.4.0'
+  compile 'androidx.appcompat:appcompat:1.0.0'
+  compile 'androidx.recyclerview:recyclerview:1.0.0'
 
   //unit tests
   testCompile 'junit:junit:4.12'
@@ -34,15 +35,21 @@ dependencies {
   testCompile 'org.mockito:mockito-core:1.10.5'
 
   //automation tests
-  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-  androidTestCompile 'com.android.support.test:runner:0.5'
-  androidTestCompile 'com.android.support:support-annotations:23.4.0'
-  androidTestCompile 'com.android.support.test:rules:0.4.1'
-  androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+  androidTestCompile 'androidx.test.espresso:espresso-core:3.1.0'
+  androidTestCompile 'androidx.test.ext:junit:1.1.1'
+  androidTestCompile 'androidx.annotation:annotation:1.0.0'
+  androidTestCompile 'androidx.test:rules:1.1.1'
+  androidTestCompile('androidx.test.espresso:espresso-contrib:3.1.0') {
     // Necessary to avoid version conflicts
     exclude group: 'com.android.support', module: 'appcompat'
     exclude group: 'com.android.support', module: 'support-v4'
     exclude group: 'com.android.support', module: 'support-annotations'
     exclude module: 'recyclerview-v7'
   }
+  implementation "androidx.core:core-ktx:+"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+  maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+  mavenCentral()
 }

@@ -25,12 +25,12 @@ apply plugin: 'com.android.library'
 //}
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 30
+  buildToolsVersion "30.0.3"
 
   defaultConfig {
     minSdkVersion 16
-    targetSdkVersion 23
+    targetSdkVersion 30
     versionCode 2
     versionName "1.4"
   }
@@ -43,8 +43,8 @@ android {
 
 dependencies {
   //android
-  compile 'com.android.support:appcompat-v7:23.4.0'
-  compile 'com.android.support:recyclerview-v7:23.4.0'
+  compile 'androidx.appcompat:appcompat:1.0.0'
+  compile 'androidx.recyclerview:recyclerview:1.0.0'
 
   //unit tests
   testCompile 'junit:junit:4.12'
