@@ -91,4 +91,53 @@ public class ExpandCollapseController {
     return expanded;
   }
 
+  /**
+   * @param group the {@link ExpandableGroup} being expanded
+   */
+  void expandGroup(ExpandableGroup group) {
+    ExpandableListPosition listPos =
+            expandableList.getUnflattenedPosition(expandableList.getFlattenedGroupIndex(group));
+    boolean isExpanded = expandableList.expandedGroupIndexes[listPos.groupPos];
+    // No-op on repeating calls
+    if (!isExpanded) {
+      expandGroup(listPos);
+    }
+  }
+
+  /**
+   * @param flatPos The flat list position of the group
+   */
+  void expandGroup(int flatPos) {
+    ExpandableListPosition listPos = expandableList.getUnflattenedPosition(flatPos);
+    boolean isExpanded = expandableList.expandedGroupIndexes[listPos.groupPos];
+    // No-op on repeating calls
+    if (!isExpanded) {
+      expandGroup(listPos);
+    }
+  }
+
+  /**
+   * @param group the {@link ExpandableGroup} being collapsed
+   */
+  void collapseGroup(ExpandableGroup group) {
+    ExpandableListPosition listPos =
+            expandableList.getUnflattenedPosition(expandableList.getFlattenedGroupIndex(group));
+    boolean isExpanded = expandableList.expandedGroupIndexes[listPos.groupPos];
+    // No-op on repeating calls
+    if (isExpanded) {
+      collapseGroup(listPos);
+    }
+  }
+
+  /**
+   * @param flatPos The flat list position of the group
+   */
+  void collapseGroup(int flatPos) {
+    ExpandableListPosition listPos = expandableList.getUnflattenedPosition(flatPos);
+    boolean isExpanded = expandableList.expandedGroupIndexes[listPos.groupPos];
+    // No-op on repeating calls
+    if (isExpanded) {
+      collapseGroup(listPos);
+    }
+  }
 }

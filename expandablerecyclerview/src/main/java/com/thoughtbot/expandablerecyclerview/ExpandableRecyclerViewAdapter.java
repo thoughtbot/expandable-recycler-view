@@ -187,6 +187,24 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
   }
 
   /**
+   * Explicitly expand a group. Expanding already expandend groups does nothing.
+   *
+   * @param group the {@link ExpandableGroup} being expanded
+   */
+  public void expandGroup(ExpandableGroup group) {
+    expandCollapseController.expandGroup(group);
+  }
+
+  /**
+   * Explicitly collapse a group. Collapsing already collapsed groups does nothing.
+   *
+   * @param group the {@link ExpandableGroup} being expanded
+   */
+  public void collapseGroup(ExpandableGroup group) {
+    expandCollapseController.collapseGroup(group);
+  }
+
+  /**
    * @param flatPos the flattened position of an item in the list
    * @return true if {@code group} is expanded, false if it is collapsed
    */

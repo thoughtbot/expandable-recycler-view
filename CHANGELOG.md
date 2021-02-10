@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 1.5 - September 11th, 2020
+
+- BUGFIX: fix writeToParcel IndexOutOfBounds (#183).
+- Feature: explicitly expand/collapse state instead of just toggle (#146).
+- Documentation improvements (#48, #66, #143).
+- New maintainer. Hi, I'm Mike.
+
 ## Version 1.4 - January 17th 2017
 - Upgrade Robolectric version to `3.2.1`
 - Fix how `GroupViewHolder`'s expand and collapse method are called
