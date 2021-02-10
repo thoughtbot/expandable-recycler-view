@@ -37,12 +37,13 @@ Ideally, a bug report should include a pull request with failing specs.
 
 ## Notes
 * Please add tests if you changed code.
-* Please make sure your code follows the [thoughtbot java style guide][styles]
+* Please make sure your code follows the thoughtbot [android][android_style_guide] and [java][java_style_guide] style guides
 
 [repo]: https://github.com/thoughtbot/expandable-recycler-view/tree/master/expandablerecyclerview
 [fork]: https://help.github.com/articles/fork-a-repo/
 [branch]: https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/
 [pr]: https://help.github.com/articles/using-pull-requests/
-[styles]: https://github.com/thoughtbot/guides/tree/master/style/android/java
+[android_style_guide]: https://github.com/thoughtbot/guides/tree/master/android
+[java_style_guide]: https://github.com/thoughtbot/guides/tree/master/java
 
 Inspired by https://github.com/middleman/middleman-heroku/blob/master/CONTRIBUTING.md
