@@ -16,7 +16,7 @@ import java.util.List;
 import static android.view.LayoutInflater.from;
 
 public class MultiTypeGenreAdapter
-    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder> {
+    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder, Genre> {
 
   public static final int FAVORITE_VIEW_TYPE = 3;
   public static final int ARTIST_VIEW_TYPE = 4;
@@ -84,5 +84,10 @@ public class MultiTypeGenreAdapter
   @Override
   public boolean isChild(int viewType) {
     return viewType == FAVORITE_VIEW_TYPE || viewType == ARTIST_VIEW_TYPE;
+  }
+
+  @Override
+  public void onGroupItemClick(Genre group, int flatPos) {
+
   }
 }

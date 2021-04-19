@@ -7,12 +7,13 @@ import com.thoughtbot.expandablecheckrecyclerview.CheckableChildRecyclerViewAdap
 import com.thoughtbot.expandablecheckrecyclerview.models.CheckedExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
+import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
 import java.util.List;
 
 public class MultiCheckGenreAdapter extends
-    CheckableChildRecyclerViewAdapter<GenreViewHolder, MultiCheckArtistViewHolder> {
+    CheckableChildRecyclerViewAdapter<GenreViewHolder, MultiCheckArtistViewHolder, Genre> {
 
   public MultiCheckGenreAdapter(List<MultiCheckGenre> groups) {
     super(groups);
@@ -43,5 +44,9 @@ public class MultiCheckGenreAdapter extends
   public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
       ExpandableGroup group) {
     holder.setGenreTitle(group);
+  }
+
+  @Override
+  public void onGroupItemClick(Genre group, int flatPos) {
   }
 }

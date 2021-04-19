@@ -16,8 +16,8 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHolder, CCVH extends CheckableChildViewHolder>
-    extends ExpandableRecyclerViewAdapter<GVH, CCVH>
+public abstract class CheckableChildRecyclerViewAdapter<GVH extends GroupViewHolder, CCVH extends CheckableChildViewHolder, O>
+    extends ExpandableRecyclerViewAdapter<GVH, CCVH, O>
     implements OnChildCheckChangedListener, OnChildrenCheckStateChangedListener {
 
   private static final String CHECKED_STATE_MAP = "child_check_controller_checked_state_map";
