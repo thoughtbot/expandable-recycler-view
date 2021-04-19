@@ -2,6 +2,7 @@ package com.thoughtbot.expandablerecyclerview.sample;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.sample.multitype.MultiTypeGenreAdapter;
 import java.util.List;
@@ -44,7 +45,7 @@ public class MultiTypeGenreAdapterTest {
     MultiTypeGenreAdapter adapter = new MultiTypeGenreAdapter(groups);
 
     //initial state
-    int initialExpected = ExpandableListPosition.GROUP;
+    int initialExpected = com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition.GROUP;
     int initialActual = adapter.getItemViewType(3);
 
     assertEquals(initialExpected, initialActual);

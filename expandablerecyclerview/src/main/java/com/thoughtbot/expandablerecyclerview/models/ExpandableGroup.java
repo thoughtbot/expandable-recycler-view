@@ -25,6 +25,10 @@ public class ExpandableGroup<T extends Parcelable> implements Parcelable {
     return items;
   }
 
+  public void setItems(List<T> items) {
+    this.items = items;
+  }
+
   public int getItemCount() {
     return items == null ? 0 : items.size();
   }
@@ -32,9 +36,9 @@ public class ExpandableGroup<T extends Parcelable> implements Parcelable {
   @Override
   public String toString() {
     return "ExpandableGroup{" +
-        "title='" + title + '\'' +
-        ", items=" + items +
-        '}';
+            "title='" + title + '\'' +
+            ", items=" + items +
+            '}';
   }
 
   protected ExpandableGroup(Parcel in) {
@@ -74,15 +78,15 @@ public class ExpandableGroup<T extends Parcelable> implements Parcelable {
 
   @SuppressWarnings("unused")
   public static final Creator<ExpandableGroup> CREATOR =
-      new Creator<ExpandableGroup>() {
-        @Override
-        public ExpandableGroup createFromParcel(Parcel in) {
-          return new ExpandableGroup(in);
-        }
+          new Creator<ExpandableGroup>() {
+            @Override
+            public ExpandableGroup createFromParcel(Parcel in) {
+              return new ExpandableGroup(in);
+            }
 
-        @Override
-        public ExpandableGroup[] newArray(int size) {
-          return new ExpandableGroup[size];
-        }
-      };
+            @Override
+            public ExpandableGroup[] newArray(int size) {
+              return new ExpandableGroup[size];
+            }
+          };
 }

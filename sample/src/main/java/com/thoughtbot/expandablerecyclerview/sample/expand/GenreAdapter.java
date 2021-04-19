@@ -3,14 +3,15 @@ package com.thoughtbot.expandablerecyclerview.sample.expand;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
+
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import java.util.List;
 
-public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder, ArtistViewHolder> {
+public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder, ArtistViewHolder, Genre> {
 
   public GenreAdapter(List<? extends ExpandableGroup> groups) {
     super(groups);
@@ -43,5 +44,10 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
       ExpandableGroup group) {
 
     holder.setGenreTitle(group);
+  }
+
+  @Override
+  public void onGroupItemClick(Genre group, int flatPos) {
+
   }
 }
