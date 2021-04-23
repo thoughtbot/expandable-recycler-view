@@ -165,20 +165,26 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * @return false if click expanded group, true if click collapsed group
    */
   @Override
-  public void onGroupClick(int flatPos) {
+  public boolean onGroupClick(int flatPos) {
 
     if (groupClickListener != null) {
       ExpandableListPosition listPos = expandableList.getUnflattenedPosition(flatPos);
       ExpandableGroup group = expandableList.getExpandableGroup(listPos);
       groupClickListener.onGroupClick(flatPos);
+
+      //checks if the group is expanded to avoid fetch children when collapse group
       if (!isGroupExpanded(flatPos)) {
+        //checks if the group has children, so it is not necessary to fetch children again.
         if (group.getItemCount() == 0) {
           groupClickListener.onGroupItemClick((O)group, listPos.groupPos);
         }
       }
     }
-    expandCollapseController.toggleGroup(flatPos);
+    return expandCollapseController.toggleGroup(flatPos);
   }
+
+  @Override
+  public void onGroupItemClick(O group, int flatPos) {}
 
   /**
    * @param flatPos The flat list position of the group
