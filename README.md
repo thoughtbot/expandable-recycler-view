@@ -402,12 +402,12 @@ An example of a `CheckableChildRecyclerViewAdapter` using `SingleCheckExpandable
 ### multi type
 An example of a `MultiTypeExpandableRecyclerViewAdapter` using two different child view holders
 
-<img src="https://user-images.githubusercontent.com/4707232/115924122-b02f5700-a455-11eb-99fb-adfb2539210f.gif" width=300/>
+<img src="https://cloud.githubusercontent.com/assets/5386934/17262690/ac0eeb9e-5591-11e6-9809-8b76644defee.gif" width=300/>
 
 ### Dynamically Add Child
 An example of a `ExpandableRecyclerViewAdapter` adding children dynamically
 
-
+<img src="https://user-images.githubusercontent.com/4707232/115924122-b02f5700-a455-11eb-99fb-adfb2539210f.gif" width=300/>
 
 ## Contributing
 
