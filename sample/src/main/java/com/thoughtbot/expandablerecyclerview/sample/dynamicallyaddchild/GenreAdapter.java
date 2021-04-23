@@ -52,7 +52,6 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
 
   public void onFetchingArtists(int position) {
     ((List<Genre>) getGroups()).get(position).setFetching(true);
-    notifyItemChanged(position);
   }
 
   public void onResult(List<Artist> artists, int position) {
