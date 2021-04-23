@@ -144,9 +144,4 @@ public class MultiTypeCheckGenreAdapter
       return ARTIST_VIEW_TYPE;
     }
   }
-
-  @Override
-  public void onGroupItemClick(Genre group, int flatPos) {
-
-  }
 }

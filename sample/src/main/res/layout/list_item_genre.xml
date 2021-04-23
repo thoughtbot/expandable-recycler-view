@@ -31,5 +31,12 @@
     android:layout_marginRight="@dimen/horizontal_margin"
     app:srcCompat="@drawable/ic_arrow_down" />
 
+  <ProgressBar
+      android:id="@+id/progress_circular"
+      android:layout_width="match_parent"
+      android:layout_height="32dp"
+      android:layout_gravity="center_vertical|center_horizontal"
+      android:visibility="gone"/>
+
 </FrameLayout>
 

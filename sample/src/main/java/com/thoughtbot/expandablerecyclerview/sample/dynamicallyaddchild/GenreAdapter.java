@@ -1,14 +1,15 @@
-package com.thoughtbot.expandablerecyclerview.sample.expand;
+package com.thoughtbot.expandablerecyclerview.sample.dynamicallyaddchild;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
 import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
-import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
+
 import java.util.List;
 
 public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder, ArtistViewHolder, Genre> {
@@ -33,7 +34,7 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
 
   @Override
   public void onBindChildViewHolder(ArtistViewHolder holder, int flatPosition,
-      ExpandableGroup group, int childIndex) {
+                                    ExpandableGroup group, int childIndex) {
 
     final Artist artist = ((Genre) group).getItems().get(childIndex);
     holder.setArtistName(artist.getName());
@@ -41,8 +42,22 @@ public class GenreAdapter extends ExpandableRecyclerViewAdapter<GenreViewHolder,
 
   @Override
   public void onBindGroupViewHolder(GenreViewHolder holder, int flatPosition,
-      ExpandableGroup group) {
-
+                                    ExpandableGroup group) {
     holder.setGenreTitle(group);
+    if (((Genre) group).isFetching())
+      holder.showProgressBar();
+    else
+      holder.hideProgressBar();
+  }
+
+  public void onFetchingArtists(int position) {
+    ((List<Genre>) getGroups()).get(position).setFetching(true);
+    notifyItemChanged(position);
+  }
+
+  public void onResult(List<Artist> artists, int position) {
+    ((List<Genre>) getGroups()).get(position).setFetching(false);
+    getGroups().get(position).setItems(artists);
+    notifyItemChanged(position);
   }
 }

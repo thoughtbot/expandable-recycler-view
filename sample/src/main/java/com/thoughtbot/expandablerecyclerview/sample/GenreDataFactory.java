@@ -3,6 +3,7 @@ package com.thoughtbot.expandablerecyclerview.sample;
 import com.thoughtbot.expandablerecyclerview.sample.multicheck.MultiCheckGenre;
 import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckGenre;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GenreDataFactory {
@@ -29,6 +30,16 @@ public class GenreDataFactory {
         makeSingleCheckClassicGenre(),
         makeSingleCheckSalsaGenre(),
         makeSingleCheckBluegrassGenre());
+  }
+
+  public static List<Genre> makeGenresWithoutArtists() {
+    return Arrays.asList(
+            new Genre("Rock", Collections.<Artist>emptyList(), R.drawable.ic_electric_guitar),
+            new Genre("Jazz", Collections.<Artist>emptyList(), R.drawable.ic_saxaphone),
+            new Genre("Classic", Collections.<Artist>emptyList(), R.drawable.ic_violin),
+            new Genre("Salsa", Collections.<Artist>emptyList(), R.drawable.ic_maracas),
+            new Genre("Bluegrass", Collections.<Artist>emptyList(), R.drawable.ic_banjo)
+    );
   }
 
   public static Genre makeRockGenre() {

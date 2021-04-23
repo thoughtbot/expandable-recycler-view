@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.thoughtbot.expandablerecyclerview.sample.dynamicallyaddchild.ExpandDynamicallyAddChildActivity;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ExpandActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multicheck.MultiCheckActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multitype.MultiTypeActivity;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button mixedTypeAndCheck = (Button) findViewById(R.id.mixedtype_check_button);
     mixedTypeAndCheck.setOnClickListener(navigateTo(MultiTypeCheckGenreActivity.class));
+
+    Button dynamicallyAddChildButton = (Button) findViewById(R.id.expand_dynamically_add_child_button);
+    dynamicallyAddChildButton.setOnClickListener(navigateTo(ExpandDynamicallyAddChildActivity.class));
   }
 
   public OnClickListener navigateTo(final Class<?> clazz) {

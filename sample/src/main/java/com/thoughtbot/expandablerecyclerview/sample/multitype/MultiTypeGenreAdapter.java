@@ -85,9 +85,4 @@ public class MultiTypeGenreAdapter
   public boolean isChild(int viewType) {
     return viewType == FAVORITE_VIEW_TYPE || viewType == ARTIST_VIEW_TYPE;
   }
-
-  @Override
-  public void onGroupItemClick(Genre group, int flatPos) {
-
-  }
 }

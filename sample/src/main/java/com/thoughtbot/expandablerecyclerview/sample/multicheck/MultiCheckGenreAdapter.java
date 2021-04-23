@@ -45,8 +45,4 @@ public class MultiCheckGenreAdapter extends
       ExpandableGroup group) {
     holder.setGenreTitle(group);
   }
-
-  @Override
-  public void onGroupItemClick(Genre group, int flatPos) {
-  }
 }
