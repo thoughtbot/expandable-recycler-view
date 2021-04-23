@@ -7,9 +7,25 @@ public class Genre extends ExpandableGroup<Artist> {
 
   private int iconResId;
 
+  private boolean isFetching;
+
   public Genre(String title, List<Artist> items, int iconResId) {
     super(title, items);
     this.iconResId = iconResId;
+  }
+
+  public Genre(String title, List<Artist> items, int iconResId, boolean isFetching) {
+    super(title, items);
+    this.isFetching = isFetching;
+    this.iconResId = iconResId;
+  }
+
+  public boolean isFetching() {
+    return isFetching;
+  }
+
+  public void setFetching(boolean fetching) {
+    isFetching = fetching;
   }
 
   public int getIconResId() {

@@ -13,18 +13,20 @@ import com.thoughtbot.expandablerecyclerview.MultiTypeExpandableRecyclerViewAdap
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.sample.Artist;
+import com.thoughtbot.expandablerecyclerview.sample.Genre;
 import com.thoughtbot.expandablerecyclerview.sample.R;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.expand.GenreViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckArtistViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.LayoutInflater.from;
 
 public class MultiTypeCheckGenreAdapter
-    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder>
+    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder, Genre>
     implements OnChildCheckChangedListener, OnChildrenCheckStateChangedListener {
 
   private static final String CHECKED_STATE_MAP = "child_check_controller_checked_state_map";

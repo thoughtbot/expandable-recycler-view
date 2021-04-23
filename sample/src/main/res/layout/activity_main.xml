@@ -35,4 +35,10 @@
     android:layout_height="wrap_content"
     android:text="Multi Type And Check Sample" />
 
+
+  <Button
+      android:id="@+id/expand_dynamically_add_child_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Dynamically add child Sample" />
 </LinearLayout>

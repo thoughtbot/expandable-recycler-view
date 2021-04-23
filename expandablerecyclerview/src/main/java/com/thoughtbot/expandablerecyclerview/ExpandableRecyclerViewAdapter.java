@@ -2,9 +2,10 @@ package com.thoughtbot.expandablerecyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.ViewGroup;
+
 import com.thoughtbot.expandablerecyclerview.listeners.ExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.listeners.GroupExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.listeners.OnGroupClickListener;
@@ -13,17 +14,18 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableList;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
+
 import java.util.List;
 
-public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder, CVH extends ChildViewHolder>
-    extends RecyclerView.Adapter implements ExpandCollapseListener, OnGroupClickListener {
+public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder, CVH extends ChildViewHolder, O>
+        extends RecyclerView.Adapter implements ExpandCollapseListener, OnGroupClickListener<O> {
 
   private static final String EXPAND_STATE_MAP = "expandable_recyclerview_adapter_expand_state_map";
 
   protected ExpandableList expandableList;
   private ExpandCollapseController expandCollapseController;
 
-  private OnGroupClickListener groupClickListener;
+  private OnGroupClickListener<O> groupClickListener;
   private GroupExpandCollapseListener expandCollapseListener;
 
   public ExpandableRecyclerViewAdapter(List<? extends ExpandableGroup> groups) {
@@ -44,7 +46,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * that holds a {@code android.view.View} of the given view type.
    */
   @Override
-  public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     switch (viewType) {
       case ExpandableListPosition.GROUP:
         GVH gvh = onCreateGroupViewHolder(parent, viewType);
@@ -71,7 +73,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * ExpandableList#getVisibleItemCount()} in the list at which to bind
    */
   @Override
-  public void onBindViewHolder(ViewHolder holder, int position) {
+  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     ExpandableListPosition listPos = expandableList.getUnflattenedPosition(position);
     ExpandableGroup group = expandableList.getExpandableGroup(listPos);
     switch (listPos.type) {
@@ -164,11 +166,25 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    */
   @Override
   public boolean onGroupClick(int flatPos) {
+
     if (groupClickListener != null) {
+      ExpandableListPosition listPos = expandableList.getUnflattenedPosition(flatPos);
+      ExpandableGroup group = expandableList.getExpandableGroup(listPos);
       groupClickListener.onGroupClick(flatPos);
+
+      //checks if the group is expanded to avoid fetch children when collapse group
+      if (!isGroupExpanded(flatPos)) {
+        //checks if the group has children, so it is not necessary to fetch children again.
+        if (group.getItemCount() == 0) {
+          groupClickListener.onGroupItemClick((O)group, listPos.groupPos);
+        }
+      }
     }
     return expandCollapseController.toggleGroup(flatPos);
   }
+
+  @Override
+  public void onGroupItemClick(O group, int flatPos) {}
 
   /**
    * @param flatPos The flat list position of the group
@@ -303,7 +319,7 @@ public abstract class ExpandableRecyclerViewAdapter<GVH extends GroupViewHolder,
    * @param childIndex the index of this child within it's {@link ExpandableGroup}
    */
   public abstract void onBindChildViewHolder(CVH holder, int flatPosition, ExpandableGroup group,
-      int childIndex);
+                                             int childIndex);
 
   /**
    * Called from onBindViewHolder(RecyclerView.ViewHolder, int) when the list item bound to is a

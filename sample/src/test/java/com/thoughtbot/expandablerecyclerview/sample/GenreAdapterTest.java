@@ -2,8 +2,10 @@ package com.thoughtbot.expandablerecyclerview.sample;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.widget.LinearLayout;
+
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ArtistViewHolder;
 import com.thoughtbot.expandablerecyclerview.sample.expand.GenreAdapter;
@@ -48,11 +50,11 @@ public class GenreAdapterTest {
     LinearLayout parent = new LinearLayout(context);
 
     //child view holder
-    ViewHolder childViewHolder = adapter.onCreateViewHolder(parent, ExpandableListPosition.CHILD);
+    RecyclerView.ViewHolder childViewHolder = adapter.onCreateViewHolder(parent, ExpandableListPosition.CHILD);
     assertTrue(childViewHolder instanceof ArtistViewHolder);
 
     //group view holder
-    ViewHolder groupViewHolder = adapter.onCreateViewHolder(parent, ExpandableListPosition.GROUP);
+    RecyclerView.ViewHolder groupViewHolder = adapter.onCreateViewHolder(parent, ExpandableListPosition.GROUP);
     assertTrue(groupViewHolder instanceof GenreViewHolder);
   }
 
@@ -72,7 +74,7 @@ public class GenreAdapterTest {
     GenreAdapter adapter = new GenreAdapter(groups);
 
     //initial state
-    int initialExpected = ExpandableListPosition.GROUP;
+    int initialExpected = com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition.GROUP;
     int initialActual = adapter.getItemViewType(3);
 
     assertEquals(initialExpected, initialActual);

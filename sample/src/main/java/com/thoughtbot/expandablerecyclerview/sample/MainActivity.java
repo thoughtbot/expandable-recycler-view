@@ -1,18 +1,20 @@
 package com.thoughtbot.expandablerecyclerview.sample;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.thoughtbot.expandablerecyclerview.sample.dynamicallyaddchild.ExpandDynamicallyAddChildActivity;
 import com.thoughtbot.expandablerecyclerview.sample.expand.ExpandActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multicheck.MultiCheckActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multitype.MultiTypeActivity;
 import com.thoughtbot.expandablerecyclerview.sample.multitypeandcheck.MultiTypeCheckGenreActivity;
 import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class MainActivity extends Activity {
 
     Button mixedTypeAndCheck = (Button) findViewById(R.id.mixedtype_check_button);
     mixedTypeAndCheck.setOnClickListener(navigateTo(MultiTypeCheckGenreActivity.class));
+
+    Button dynamicallyAddChildButton = (Button) findViewById(R.id.expand_dynamically_add_child_button);
+    dynamicallyAddChildButton.setOnClickListener(navigateTo(ExpandDynamicallyAddChildActivity.class));
   }
 
   public OnClickListener navigateTo(final Class<?> clazz) {

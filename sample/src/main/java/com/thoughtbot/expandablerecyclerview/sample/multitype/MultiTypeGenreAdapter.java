@@ -16,7 +16,7 @@ import java.util.List;
 import static android.view.LayoutInflater.from;
 
 public class MultiTypeGenreAdapter
-    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder> {
+    extends MultiTypeExpandableRecyclerViewAdapter<GenreViewHolder, ChildViewHolder, Genre> {
 
   public static final int FAVORITE_VIEW_TYPE = 3;
   public static final int ARTIST_VIEW_TYPE = 4;

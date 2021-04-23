@@ -37,6 +37,10 @@
       android:name=".multitypeandcheck.MultiTypeCheckGenreActivity"
       android:parentActivityName=".MainActivity" />
 
+    <activity
+        android:name=".dynamicallyaddchild.ExpandDynamicallyAddChildActivity"
+        android:parentActivityName=".MainActivity" />
+
   </application>
 
 </manifest>

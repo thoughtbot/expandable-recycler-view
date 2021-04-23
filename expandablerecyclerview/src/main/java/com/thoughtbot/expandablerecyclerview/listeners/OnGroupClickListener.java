@@ -1,9 +1,6 @@
 package com.thoughtbot.expandablerecyclerview.listeners;
 
-import android.support.v7.widget.RecyclerView;
-import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
-
-public interface OnGroupClickListener {
+public interface OnGroupClickListener<O> {
 
   /**
    * @param flatPos the flat position (raw index within the list of visible items in the
@@ -11,4 +8,11 @@ public interface OnGroupClickListener {
    * @return false if click expanded group, true if click collapsed group
    */
   boolean onGroupClick(int flatPos);
+
+  /**
+   * @param flatPos the flat position (raw index within the list of visible items in the
+   * RecyclerView of a GroupViewHolder)
+   * @param group group item object
+   */
+  void onGroupItemClick(O group, int flatPos);
 }
